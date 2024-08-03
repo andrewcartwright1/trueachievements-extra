@@ -1,4 +1,4 @@
-import type { LoaderContext } from 'webpack';
+import { LoaderContext } from '@rspack/core';
 import { compress } from 'compress-json';
 import groupEmojis from '../helpers/group-emojis';
 

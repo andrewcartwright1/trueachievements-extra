@@ -1,59 +1,55 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkStaffWalkthroughImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Manage Walkthrough"
+  expanded=false
+  accordion-target=".js-ta-x-settings-staff-walkthrough-improvements-manage-walkthrough"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-staff-walkthrough-improvements-manage-walkthrough t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Manage Walkthrough"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Clickable Table Links"
+    id="chkStaffWalkthroughImprovementsClickableTableLinks"
+    config-path="staffWalkthroughImprovements.manageWalkthrough.clickableTableLinks"
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Clickable Table Links"
-      id="chkStaffWalkthroughImprovementsClickableTableLinks"
-      config-path="staffWalkthroughImprovements.manageWalkthrough.clickableTableLinks"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Add Missing Buttons"
+    id="chkStaffWalkthroughImprovementsAddPageButton"
+    config-path="staffWalkthroughImprovements.manageWalkthrough.addMissingButtons"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Add Missing Buttons"
-      id="chkStaffWalkthroughImprovementsAddPageButton"
-      config-path="staffWalkthroughImprovements.manageWalkthrough.addMissingButtons"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Auto Select First Walkthrough"
+    id="chkStaffWalkthroughImprovementsAutoSelectFirst"
+    config-path="staffWalkthroughImprovements.manageWalkthrough.autoSelectFirst"
+    helper-render-condition='{ "selector": "#chkStaffWalkthroughImprovementsManageWalkthroughDefaultStatus", "checked": true }'
+    helper-text="This feature runs after the default status has been set."
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Auto Select First Walkthrough"
-      id="chkStaffWalkthroughImprovementsAutoSelectFirst"
-      config-path="staffWalkthroughImprovements.manageWalkthrough.autoSelectFirst"
-      helper-render-condition='{ "selector": "#chkStaffWalkthroughImprovementsManageWalkthroughDefaultStatus", "checked": true }'
-      helper-text="This feature runs after the default status has been set."
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Default Status for Manage Walkthrough"
+    id="chkStaffWalkthroughImprovementsManageWalkthroughDefaultStatus"
+    config-path="staffWalkthroughImprovements.manageWalkthrough.manageWalkthroughDefaultStatus"
+    classes="ta-x-hide-border"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Default Status for Manage Walkthrough"
-        id="chkStaffWalkthroughImprovementsManageWalkthroughDefaultStatus"
-        config-path="staffWalkthroughImprovements.manageWalkthrough.manageWalkthroughDefaultStatus"
-      }}
-
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkStaffWalkthroughImprovementsManageWalkthroughDefaultStatus", "checked": true }'
-        id="selStaffWalkthroughImprovementsManageWalkthroughDefaultStatusValue"
-        config-path="staffWalkthroughImprovements.manageWalkthrough.manageWalkthroughDefaultStatusValue"
-        options='[
-                    { "value": "-1", "text": "(All)", "selected": true },
-                    { "value": "New", "text": "New" },
-                    { "value": "In progress", "text": "In progress" }, 
-                    { "value": "Ready for review", "text": "Ready for review" },
-                    { "value": "Ready for publish", "text": "Ready for publish" },
-                    { "value": "Published", "text": "Published" },
-                    { "value": "New owner required", "text": "New owner required" }]'
-      }}
-    </div>
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkStaffWalkthroughImprovementsManageWalkthroughDefaultStatus", "checked": true }'
+    id="selStaffWalkthroughImprovementsManageWalkthroughDefaultStatusValue"
+    config-path="staffWalkthroughImprovements.manageWalkthrough.manageWalkthroughDefaultStatusValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    options='[
+                { "value": "-1", "text": "(All)", "selected": true },
+                { "value": "New", "text": "New" },
+                { "value": "In progress", "text": "In progress" }, 
+                { "value": "Ready for review", "text": "Ready for review" },
+                { "value": "Ready for publish", "text": "Ready for publish" },
+                { "value": "Published", "text": "Published" },
+                { "value": "New owner required", "text": "New owner required" }]'
+  }}
+{{/includes}}

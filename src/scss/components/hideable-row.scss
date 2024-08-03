@@ -1,0 +1,120 @@
+body {
+  &.trueachievement-extras {
+    li,
+    tr {
+      &[data-row-hidden] {
+        .ta-x-hideable-row {
+          display: flex;
+          justify-content: flex-end;
+          align-content: center;
+          flex-wrap: wrap;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          svg {
+            pointer-events: none;
+            display: none;
+            height: 20px;
+          }
+        }
+      }
+
+      &[data-row-hidden='true'] {
+        p {
+          &.ta-x-hideable-row-filter-text {
+            font-weight: 700;
+            font-size: 1.4rem;
+          }
+
+          &:not(.ta-x-hideable-row-filter-text) {
+            display: none;
+          }
+        }
+
+        svg {
+          &.ta-x-hideable-row-show {
+            display: unset;
+          }
+        }
+      }
+
+      &[data-row-hidden='false'] {
+        p {
+          &.ta-x-hideable-row-filter-text {
+            display: none;
+          }
+        }
+
+        svg {
+          &.ta-x-hideable-row-hide {
+            display: unset;
+          }
+        }
+      }
+    }
+
+    li {
+      &[data-row-hidden='true'] {
+        .stats,
+        .author-pages,
+        .read,
+        .stack {
+          display: none;
+        }
+
+        .last {
+          justify-content: flex-end;
+
+          img,
+          div:not(.ta-x-hideable-row) {
+            display: none;
+          }
+        }
+      }
+
+      &[data-row-hidden='false'] {
+        .last {
+          .ta-x-hideable-row {
+            padding-left: 1rem;
+          }
+        }
+      }
+    }
+
+    tr {
+      &[data-row-hidden='true'] {
+        td {
+          font-size: 0;
+
+          &:not(:first-child) {
+            border-left: 0;
+
+            *:not(.ta-x-hideable-row) {
+              visibility: hidden;
+            }
+
+            .ta-x-hideable-row {
+              padding-left: 1.5px;
+
+              * {
+                visibility: unset;
+              }
+            }
+          }
+
+          &:not(:last-child) {
+            border-right: 0;
+          }
+        }
+      }
+
+      &[data-row-hidden='false'] {
+        .ta-x-hideable-row-hide {
+          margin-right: 1px;
+        }
+      }
+    }
+  }
+}

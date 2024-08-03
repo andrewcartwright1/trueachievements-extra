@@ -19,8 +19,12 @@ export class TinyMCEScript {
     throw 'Not Implemented';
   };
 
+  afterScript = async (): Promise<void> => {
+  };
+
   injectScript = async (): Promise<void> => {
     await waitForElement('.mce-ta-x-tinymce-group');
     document.body.appendChild(await this.buildScript());
+    await this.afterScript();
   };
 }

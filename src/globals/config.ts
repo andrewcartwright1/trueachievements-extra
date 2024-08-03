@@ -1,17 +1,3 @@
-const migrateGet = <T>(oldSetting: string, newSetting: string, defaultValue: T): T => {
-  const newValue = GM_getValue(newSetting);
-
-  if (newValue !== undefined) {
-    return newValue as T;
-  }
-
-  const oldValue = GM_getValue(oldSetting, defaultValue);
-  GM_setValue(newSetting, oldValue);
-  GM_deleteValue(oldSetting);
-
-  return oldValue;
-};
-
 const arrayGet = <T>(setting: string, defaultValue: T[]): T[] => {
   const value = GM_getValue(setting, '') as string;
   return value.length !== 0 ? JSON.parse(value) : defaultValue;
@@ -19,7 +5,7 @@ const arrayGet = <T>(setting: string, defaultValue: T[]): T[] => {
 
 export const stickyHeader = {
   get enabled(): boolean {
-    return migrateGet('trueachievements-extra-stickyHeader-enabled', 'stickyHeader-enabled', false);
+    return GM_getValue('stickyHeader-enabled', false);
   },
   set enabled(value: boolean) {
     GM_setValue('stickyHeader-enabled', value);
@@ -32,22 +18,25 @@ export const stickyHeader = {
   }
 };
 
-export const emojis = {
-  get enabled(): boolean {
+export const miscellaneousImprovements = {
+  stickyHeader,
+  get emojis(): boolean {
     return GM_getValue('emojis-enabled', false);
   },
-  set enabled(value: boolean) {
+  set emojis(value: boolean) {
     GM_setValue('emojis-enabled', value);
+  },
+  get giveawayAutoOptIn(): boolean {
+    return GM_getValue('giveawayAutoOptIn-enabled', false);
+  },
+  set giveawayAutoOptIn(value: boolean) {
+    GM_setValue('giveawayAutoOptIn-enabled', value);
   }
 };
 
 export const editWalkthrough = {
   get improvedImageSelector(): boolean {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-improvedImageSelector',
-      'improvedImageSelector',
-      false
-    );
+    return GM_getValue('improvedImageSelector', false);
   },
   set improvedImageSelector(value: boolean) {
     GM_setValue('improvedImageSelector', value);
@@ -59,7 +48,7 @@ export const editWalkthrough = {
     GM_setValue('autoSaveNotification', value);
   },
   get tinymceTheme(): string {
-    return migrateGet('trueachievements-extra-staffWalkthroughImprovements-tinymceTheme', 'tinymceTheme', null);
+    return GM_getValue('tinymceTheme', null);
   },
   set tinymceTheme(value: string) {
     GM_setValue('tinymceTheme', value);
@@ -68,21 +57,13 @@ export const editWalkthrough = {
 
 export const manageWalkthrough = {
   get manageWalkthroughDefaultStatus(): boolean {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-manageWalkthroughDefaultStatus',
-      'manageWalkthroughDefaultStatus',
-      false
-    );
+    return GM_getValue('manageWalkthroughDefaultStatus', false);
   },
   set manageWalkthroughDefaultStatus(value: boolean) {
     GM_setValue('manageWalkthroughDefaultStatus', value);
   },
   get clickableTableLinks(): boolean {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-clickableTableLinks',
-      'clickableTableLinks',
-      false
-    );
+    return GM_getValue('clickableTableLinks', false);
   },
   set clickableTableLinks(value: boolean) {
     GM_setValue('clickableTableLinks', value);
@@ -100,11 +81,7 @@ export const manageWalkthrough = {
     GM_setValue('autoSelectFirst', value);
   },
   get manageWalkthroughDefaultStatusValue(): string {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-manageWalkthroughDefaultStatusValue',
-      'manageWalkthroughDefaultStatusValue',
-      '-1'
-    );
+    return GM_getValue('manageWalkthroughDefaultStatusValue', '-1');
   },
   set manageWalkthroughDefaultStatusValue(value: string) {
     GM_setValue('manageWalkthroughDefaultStatusValue', value);
@@ -113,27 +90,19 @@ export const manageWalkthrough = {
 
 export const walkthroughPage = {
   get stickyPageHistory(): boolean {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-stickyPageHistory',
-      'stickyPageHistory',
-      false
-    );
+    return GM_getValue('stickyPageHistory', false);
   },
   set stickyPageHistory(value: boolean) {
     GM_setValue('stickyPageHistory', value);
   },
   get moveButtonsToLeft(): boolean {
-    return migrateGet('trueachievements-extra-staffWalkthroughImprovements-editPageLeft', 'moveButtonsToLeft', false);
+    return GM_getValue('moveButtonsToLeft', false);
   },
   set moveButtonsToLeft(value: boolean) {
     GM_setValue('moveButtonsToLeft', value);
   },
   get walkthroughTeamButton(): boolean {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-walkthroughTeamButton',
-      'walkthroughTeamButton',
-      false
-    );
+    return GM_getValue('walkthroughTeamButton', false);
   },
   set walkthroughTeamButton(value: boolean) {
     GM_setValue('walkthroughTeamButton', value);
@@ -156,16 +125,6 @@ export const walkthroughPreview = {
 };
 
 export const staffWalkthroughImprovements = {
-  get enabled(): boolean {
-    return migrateGet(
-      'trueachievements-extra-staffWalkthroughImprovements-enabled',
-      'staffWalkthroughImprovements-enabled',
-      false
-    );
-  },
-  set enabled(value: boolean) {
-    GM_setValue('staffWalkthroughImprovements-enabled', value);
-  },
   editWalkthrough,
   manageWalkthrough,
   walkthroughPage,
@@ -185,7 +144,7 @@ export const myThreads = {
       : forumImprovements.forumImprovementsThreadFilter;
   },
   set myThreadsThreadFilter(value: boolean) {
-    myThreads.myThreadsForumOverride ? GM_setValue('myThreadsThreadFilter', value) : null;
+    myThreads.myThreadsForumOverride && GM_setValue('myThreadsThreadFilter', value);
   },
   get threadFilterKeywords(): string[] {
     return myThreads.myThreadsForumOverride
@@ -193,7 +152,7 @@ export const myThreads = {
       : forumImprovements.threadFilterKeywords;
   },
   set threadFilterKeywords(value: string[]) {
-    myThreads.myThreadsForumOverride ? GM_setValue('myThreadsThreadFilterKeywords', JSON.stringify(value)) : null;
+    myThreads.myThreadsForumOverride && GM_setValue('myThreadsThreadFilterKeywords', JSON.stringify(value));
   }
 };
 
@@ -207,12 +166,6 @@ export const walkthroughsForum = {
 };
 
 export const forumImprovements = {
-  get enabled(): boolean {
-    return GM_getValue('forumImprovements-enabled', false);
-  },
-  set enabled(value: boolean) {
-    GM_setValue('forumImprovements-enabled', value);
-  },
   get forumImprovementsThreadFilter(): boolean {
     return GM_getValue('forumImprovementsThreadFilter', false);
   },
@@ -247,16 +200,22 @@ export const sales = {
   },
   set autoSortByOrder(value: string) {
     GM_setValue('autoSortByOrder', value);
+  },
+  get hideOwnedItems(): boolean {
+    return GM_getValue('hideOwnedItems', false);
+  },
+  set hideOwnedItems(value: boolean) {
+    GM_setValue('hideOwnedItems', value);
+  },
+  get collapsibleGroups(): boolean {
+    return GM_getValue('collapsibleGroups', false);
+  },
+  set collapsibleGroups(value: boolean) {
+    GM_setValue('collapsibleGroups', value);
   }
 };
 
 export const newsImprovements = {
-  get enabled(): boolean {
-    return GM_getValue('newsImprovements-enabled', false);
-  },
-  set enabled(value: boolean) {
-    GM_setValue('newsImprovements-enabled', value);
-  },
   sales
 };
 
@@ -305,6 +264,12 @@ export const gameAchievements = {
   },
   set gameAchievementsShowGamertagNationGuides(value: boolean) {
     GM_setValue('gameAchievementsShowGamertagNationGuides', value);
+  },
+  get gameAchievementsCollapsibleGroups(): boolean {
+    return GM_getValue('gameAchievementsCollapsibleGroups', false);
+  },
+  set gameAchievementsCollapsibleGroups(value: boolean) {
+    GM_setValue('gameAchievementsCollapsibleGroups', value);
   }
 };
 
@@ -354,7 +319,7 @@ export const gameDLC = {
       : gameAchievements.gameAchievementsDefaultStatus;
   },
   set gameDLCDefaultStatus(value: boolean) {
-    gameDLC.gameDLCOverride ? GM_setValue('gameDLCDefaultStatus', value) : null;
+    gameDLC.gameDLCOverride && GM_setValue('gameDLCDefaultStatus', value);
   },
   get gameDLCDefaultStatusValue(): string {
     return gameDLC.gameDLCOverride
@@ -362,7 +327,7 @@ export const gameDLC = {
       : gameAchievements.gameAchievementsDefaultStatusValue;
   },
   set gameDLCDefaultStatusValue(value: string) {
-    gameDLC.gameDLCOverride ? GM_setValue('gameDLCDefaultStatusValue', value) : null;
+    gameDLC.gameDLCOverride && GM_setValue('gameDLCDefaultStatusValue', value);
   },
   get gameDLCIndividualProgress(): boolean {
     return gameDLC.gameDLCOverride
@@ -370,7 +335,15 @@ export const gameDLC = {
       : gameAchievements.gameAchievementsIndividualProgress;
   },
   set gameDLCIndividualProgress(value: boolean) {
-    gameDLC.gameDLCOverride ? GM_setValue('gameDLCIndividualProgress', value) : null;
+    gameDLC.gameDLCOverride && GM_setValue('gameDLCIndividualProgress', value);
+  },
+  get gameDLCCollapsibleGroups(): boolean {
+    return gameDLC.gameDLCOverride
+      ? GM_getValue('gameDLCCollapsibleGroups', false)
+      : gameAchievements.gameAchievementsCollapsibleGroups;
+  },
+  set gameDLCCollapsibleGroups(value: boolean) {
+    gameDLC.gameDLCOverride && GM_setValue('gameDLCCollapsibleGroups', value);
   }
 };
 
@@ -399,7 +372,7 @@ export const gameChallenges = {
       : gameAchievements.gameAchievementsIndividualProgress;
   },
   set gameChallengesIndividualProgress(value: boolean) {
-    gameChallenges.gameChallengesOverride ? GM_setValue('gameChallengesIndividualProgress', value) : null;
+    gameChallenges.gameChallengesOverride && GM_setValue('gameChallengesIndividualProgress', value);
   }
 };
 
@@ -416,7 +389,7 @@ export const gameForums = {
       : forumImprovements.forumImprovementsThreadFilter;
   },
   set gameForumsThreadFilter(value: boolean) {
-    gameForums.gameForumsForumOverride ? GM_setValue('gameForumsThreadFilter', value) : null;
+    gameForums.gameForumsForumOverride && GM_setValue('gameForumsThreadFilter', value);
   },
   get threadFilterKeywords(): string[] {
     return gameForums.gameForumsForumOverride
@@ -424,7 +397,7 @@ export const gameForums = {
       : forumImprovements.threadFilterKeywords;
   },
   set threadFilterKeywords(value: string[]) {
-    gameForums.gameForumsForumOverride ? GM_setValue('gameForumsThreadFilterKeywords', JSON.stringify(value)) : null;
+    gameForums.gameForumsForumOverride && GM_setValue('gameForumsThreadFilterKeywords', JSON.stringify(value));
   },
   get gameForumsDefaultThread(): boolean {
     return GM_getValue('gameForumsDefaultThread', false);
@@ -441,12 +414,6 @@ export const gameForums = {
 };
 
 export const gamesImprovements = {
-  get enabled(): boolean {
-    return GM_getValue('gamesImprovements-enabled', false);
-  },
-  set enabled(value: boolean) {
-    GM_setValue('gamesImprovements-enabled', value);
-  },
   games,
   achievements: gameAchievements,
   challenges: gameChallenges,
@@ -465,21 +432,24 @@ export const achievements = {
 };
 
 export const gamerImprovements = {
-  get enabled(): boolean {
-    return GM_getValue('gamerImprovements-enabled', false);
-  },
-  set enabled(value: boolean) {
-    GM_setValue('gamerImprovements-enabled', value);
-  },
   achievements
 };
 
+
+export const clearLegacy = (): void => {
+  GM_deleteValue('forumImprovements-enabled');
+  GM_deleteValue('gamerImprovements-enabled');
+  GM_deleteValue('gamesImprovements-enabled');
+  GM_deleteValue('newsImprovements-enabled');
+  GM_deleteValue('staffWalkthroughImprovements-enabled');
+}
+
 export const config = {
-  stickyHeader,
-  emojis,
+  miscellaneousImprovements,
   staffWalkthroughImprovements,
   forumImprovements,
   newsImprovements,
   gamesImprovements,
-  gamerImprovements
+  gamerImprovements,
+  clearLegacy
 };

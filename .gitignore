@@ -186,9 +186,8 @@ App_Data
 # Userscript Files
 !build/
 dist/*
-html
-coverage
 .nyc_output
+vitest.config.mts.timestamp-*
 
 # VS Code
 .vscode/*

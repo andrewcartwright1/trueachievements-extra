@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { dirname } from 'path';
+import { dirname, } from 'path';
 import Handlebars from 'handlebars';
 import { JSDOM } from 'jsdom';
 import { marked } from 'marked';
@@ -9,6 +9,11 @@ import { url } from '../../package.json';
 import { default as getPath } from '../helpers/get-path-by-alias';
 
 export const includes = (): void => {
+  const minifyJson = (json: string): string => {
+    const parsedCondition = JSON.parse(json);
+    return JSON.stringify(parsedCondition);
+  }
+
   Handlebars.registerHelper('includes', (filePath: string, options) => {
     if (!filePath) {
       return;
@@ -20,8 +25,21 @@ export const includes = (): void => {
     const domContent = dom.window.document.body.innerHTML || dom.window.document.head.innerHTML;
     const domTemplate = Handlebars.compile(domContent);
 
+    if (options.hash['render-condition']) {
+      options.hash['render-condition'] = minifyJson(options.hash['render-condition']);
+    }
+
+    if (options.hash['helper-render-condition']) {
+      options.hash['helper-render-condition'] = minifyJson(options.hash['helper-render-condition']);
+    }
+
+    const customContext = {
+      ...options.hash,
+      partialContent: options.fn ? options.fn(this) : undefined
+    };
+
     return new Handlebars.SafeString(
-      domTemplate(options.hash, { data: { parentPartialDirectory: dirname(actualPath) } })
+      domTemplate(customContext, { data: { parentPartialDirectory: dirname(actualPath) } })
     );
   });
 };

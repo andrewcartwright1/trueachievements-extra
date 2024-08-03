@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "types": ["vitest/globals", "jsdom", "node", "sanitize-html"]
+  },
+  "include": ["src/**/*.spec.ts", "test/**/*.ts"],
+  "references": [{ "path": "./tsconfig.app.json" }]
+}

@@ -1,40 +1,37 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkStaffWalkthroughImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Walkthrough Page"
+  expanded=false
+  accordion-target=".js-ta-x-settings-staff-walkthrough-improvements-walkthrough-page"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-staff-walkthrough-improvements-walkthrough-page t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Walkthrough Page"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Stick Page History To Left"
+    id="chkStaffWalkthroughImprovementsStickyPageHistory"
+    config-path="staffWalkthroughImprovements.walkthroughPage.stickyPageHistory"
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Stick Page History To Left"
-      id="chkStaffWalkthroughImprovementsStickyPageHistory"
-      config-path="staffWalkthroughImprovements.walkthroughPage.stickyPageHistory"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Move Buttons To The Left"
+    id="chkStaffWalkthroughImprovementsMoveButtonsToLeft"
+    config-path="staffWalkthroughImprovements.walkthroughPage.moveButtonsToLeft"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Move Buttons To The Left"
-      id="chkStaffWalkthroughImprovementsMoveButtonsToLeft"
-      config-path="staffWalkthroughImprovements.walkthroughPage.moveButtonsToLeft"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Add Walkthrough Team Button"
+    id="chkStaffWalkthroughImprovementsWalkthroughTeamButton"
+    config-path="staffWalkthroughImprovements.walkthroughPage.walkthroughTeamButton"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Add Walkthrough Team Button"
-      id="chkStaffWalkthroughImprovementsWalkthroughTeamButton"
-      config-path="staffWalkthroughImprovements.walkthroughPage.walkthroughTeamButton"
-    }}
-
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Highlight Page Locked"
-      id="chkStaffWalkthroughImprovementsHighlightPageLocked"
-      config-path="staffWalkthroughImprovements.walkthroughPage.highlightPageLocked"
-    }}
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Highlight Page Locked"
+    id="chkStaffWalkthroughImprovementsHighlightPageLocked"
+    config-path="staffWalkthroughImprovements.walkthroughPage.highlightPageLocked"
+    classes="ta-x-hide-border"
+  }}
+{{/includes}}

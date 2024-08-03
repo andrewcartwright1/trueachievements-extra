@@ -58,7 +58,7 @@ export const tinymce = async (): Promise<void> => {
   ]);
 
   allConcurrently('Edit Walkthrough - TinyMCE Buttons', [
-    { name: 'tinymce-add-source-code-button', task: createButtonGroup },
+    { name: 'tinymce-create-button-group', task: createButtonGroup },
     { name: 'tinymce-add-toggle-theme-button', task: addTextColorButtons },
     { name: 'tinymce-add-source-code-button', task: addSourceCodeButton },
     { name: 'tinymce-add-toggle-theme-button', task: addToggleThemeButton },

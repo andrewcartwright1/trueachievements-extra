@@ -1,5 +1,5 @@
-@import './base';
-@import './edit-walkthrough';
-@import './manage-walkthrough';
-@import './walkthrough-page';
-@import './walkthrough-preview';
+@use 'base';
+@use 'edit-walkthrough';
+@use 'manage-walkthrough';
+@use 'walkthrough-page';
+@use 'walkthrough-preview';

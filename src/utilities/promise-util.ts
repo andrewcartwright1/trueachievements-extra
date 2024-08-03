@@ -9,12 +9,13 @@ export const allSequentially = async <T>(
   name: string,
   arr: { name: string; task: () => T | Promise<T> }[]
 ): Promise<T[]> => {
-  const result: T[] = [];
+  let index = 0;
+  const result = [];
 
-  for (const { task } of arr) {
-    const actualTask = needsPromisifying(task) ? promisify(task) : task;
-    const taskResult = await actualTask();
-    result.push(taskResult);
+  while (index < arr.length) {
+    const curIndex = index++;
+    const task = needsPromisifying(arr[curIndex].task) ? promisify(arr[curIndex].task) : arr[curIndex].task;
+    result[curIndex] = await task(curIndex);
   }
 
   return result;
@@ -22,7 +23,7 @@ export const allSequentially = async <T>(
 
 export const allConcurrently = async <T>(
   name: string,
-  arr: { name: string; task: () => T | Promise<T> }[],
+  arr: { name: string; task: (index?: number) => T | Promise<T> }[],
   max = 3
 ): Promise<T[]> => {
   if (arr.length === 0) {
@@ -32,17 +33,14 @@ export const allConcurrently = async <T>(
   let index = 0;
   const results = [];
 
-  // Run a pseudo-thread
   const execThread = async () => {
     while (index < arr.length) {
       const curIndex = index++;
-      // Use of `curIndex` is important because `index` may change after await is resolved
       const task = needsPromisifying(arr[curIndex].task) ? promisify(arr[curIndex].task) : arr[curIndex].task;
-      results[curIndex] = await task();
+      results[curIndex] = await task(curIndex);
     }
   };
 
-  // Start threads
   const threads = [];
 
   for (let thread = 0; thread < max; thread++) {

@@ -3,7 +3,8 @@ import { PubSubType } from '@ta-x-types';
 type Events = {
   'ajaxIntercept:request': XMLHttpRequest;
   'ajaxIntercept:response': XMLHttpRequest;
-  'snackbar:show': { text: string; type: string };
+  'snackbar:show': { text: string; type: string; timeoutMS?: number };
+  'hideableRow:hide': { element: HTMLElement; method: 'forum' | 'table'; filterText?: string };
   'accordion:setMaxHeight': HTMLElement;
   'accordion:toggleState': HTMLElement;
   'tabs:set': HTMLElement;
@@ -16,7 +17,6 @@ type Events = {
 };
 
 function PubSub<E>(): PubSubType<E> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlers: { [key: string]: any[] } = {};
 
   return {

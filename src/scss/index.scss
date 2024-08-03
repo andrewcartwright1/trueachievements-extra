@@ -1,4 +1,4 @@
-@import './base';
-@import './components';
-@import './animations';
-@import './features/index';
+@use 'base';
+@use 'components';
+@use 'animations';
+@use 'features/index';

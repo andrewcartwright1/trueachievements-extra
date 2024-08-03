@@ -1,311 +1,242 @@
 body {
   &.trueachievement-extras {
     .ta-x-settings-menu {
-      &-settings {
-        max-height: 547px;
-        overflow-y: scroll !important;
-        padding: 0 1rem !important;
-        padding-bottom: 1rem !important;
-        height: 100%;
-        position: relative;
+      .tabs-nav {
+        margin: 0;
+        margin-bottom: 0;
 
-        > div {
-          display: block;
-          padding: 0;
+        li {
+          padding-top: 1rem;
+          padding-bottom: 1.1rem;
+          font-size: 14px;
+          font-weight: 600;
         }
+      }
+
+      .t-settings {
+        padding: 0 1rem;
 
         .frm-grp {
           user-select: none;
           margin-right: 0;
         }
 
-        .frm-sel {
-          &::after {
-            top: 10px;
+        .ta-x-accordion {
+          margin: 0 -1rem;
+          padding: 1rem;
+          border-radius: 0;
+          border: 0;
+          user-select: none;
+          cursor: pointer;
+
+          span {
+            pointer-events: none;
+          }
+
+          svg {
+            height: 20px;
           }
         }
 
-        .t-settings {
-          > div {
+        .ta-x-accordion-content {
+          flex-direction: column;
+          align-items: normal;
+          padding: 0;
+          border: 0;
+        }
+
+        .ta-x-checkbox {
+          flex-wrap: wrap;
+          padding: 1rem 0;
+
+          label {
+            max-width: 85%;
+          }
+        }
+
+        .ta-x-listbox {
+          padding-top: 0;
+          flex-direction: column;
+          align-items: flex-start;
+
+          > label {
+            padding-bottom: 0.5rem;
+          }
+
+          .frm-lst {
             flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
 
-            > label {
-              max-width: 80%;
-            }
-          }
-
-          .ta-x-checkbox-help-text {
-            font-size: 1.2rem;
-            padding-top: 0.5rem;
-          }
-
-          .ta-x-listbox {
-            padding-top: 1rem;
-            border-bottom: 0;
-
-            > label {
-              padding-bottom: 0.5rem;
-              display: block;
-            }
-
-            .frm-lst {
-              width: 100%;
-              flex-wrap: wrap;
-              justify-content: space-between;
-
-              input {
-                &.textbox {
-                  flex: 1;
-                }
-
-                &[type='submit'] {
-                  margin-left: 1rem;
-                }
+            input {
+              &.textbox {
+                flex: 1;
               }
 
-              ul {
-                width: 100%;
+              &[type='submit'] {
+                margin-left: 1rem;
+              }
+            }
 
-                li {
-                  > div {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 100%;
+            ul {
+              width: 100%;
 
-                    p {
-                      word-break: break-all;
-                    }
+              li {
+                > div {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  width: 100%;
 
-                    a {
-                      margin-left: 1rem;
-                    }
+                  p {
+                    word-break: break-all;
+                  }
+
+                  a {
+                    margin-left: 1rem;
                   }
                 }
               }
             }
           }
-        }
 
-        .ta-x-settings-menu-settings-item {
-          position: absolute;
-          display: none;
-          width: 313px;
-          padding-bottom: 1rem;
-
-          &-show {
-            display: block;
-          }
-
-          .ta-x-settings-menu-credits-wrapper,
-          .ta-x-settings-menu-changelog-wrapper,
-          .ta-x-settings-menu-documentation-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-
-            a {
-              width: 100%;
-            }
-
-            h1,
-            h2 {
-              width: 100%;
-              line-height: unset;
-            }
-
-            h1 {
-              margin-bottom: 1rem;
-            }
-
-            h2 {
-              border-top: 2px solid #0e5814;
-              border-bottom: 2px solid #0e5814;
-              padding: 0.5rem;
-              font-size: 1.6rem;
-              margin: 1rem 0;
-            }
-
-            p {
-              font-size: 1.4rem;
-            }
-          }
-
-          .ta-x-settings-menu-documentation-wrapper {
-            padding-bottom: 0;
-            border: 0;
-
-            h1 {
-              &:not(:first-of-type) {
-                padding: 0.5rem 0;
-                margin-top: 1rem;
-                border-bottom: 2px solid #0552b5;
-                border-top: 2px solid #0552b5;
-              }
-            }
-
-            h2 {
-              &:first-of-type {
-                margin-top: 0;
-                margin-bottom: 1rem;
-              }
-            }
-          }
-
-          .ta-x-settings-menu-credits-wrapper {
-            padding-top: 0;
-            padding-bottom: 0;
-            border: 0;
-
-            h1 {
-              border-top: 2px solid #e9b949;
-              border-bottom: 2px solid #e9b949;
-              padding: 0.5rem 0;
-              margin-top: 0.5rem;
-              margin-bottom: 0;
-            }
-          }
-
-          .ta-x-settings-menu-changelog-wrapper {
+          &:has(+ .ta-x-accordion) {
             border-bottom: 0;
-
-            h2 {
-              &:first-of-type {
-                margin: 0;
-              }
-            }
-
-            ul {
-              margin-bottom: 0.5rem;
-            }
-          }
-
-          .ta-x-markdown-marker {
-            flex-basis: unset;
-            align-self: center;
-            padding-right: 1rem;
           }
         }
 
-        .ta-x-settings-menu-settings-accordion {
-          flex-wrap: wrap;
-          border: 0;
-          padding-bottom: 0;
+        .ta-x-select {
+          max-width: 330px;
 
-          &:last-of-type {
-            padding-bottom: 0;
+          &::after {
+            top: -1rem;
           }
+        }
 
-          &-header,
-          &-body {
-            width: 100%;
-          }
+        .ta-x-settings-helper-text {
+          font-size: 1.2rem;
+          padding-top: 0.5rem;
+        }
 
-          &-header {
-            padding: 1rem;
-            flex-shrink: unset;
-            color: #3e4c59;
-            cursor: pointer;
-            user-select: none;
-            background: #ccc;
+        .ta-x-checkbox-helper-text {
+          font-size: 1.2rem;
+          margin: 0rem 1rem 1rem;
+        }
 
-            > label {
-              color: #333 !important;
-              padding: 0;
-              text-align: left;
-              pointer-events: none;
-              font-weight: bold;
-            }
+        .ta-x-hide-border {
+          border-bottom: 0;
 
-            .frm-tgl {
-              pointer-events: none;
-
-              > label {
-                padding: 0;
-                pointer-events: none;
-              }
-            }
-
-            span {
-              width: 100%;
-              pointer-events: none;
-            }
-
-            svg {
-              height: 20px;
-              pointer-events: none;
-            }
-
-            &.collapsed {
-              svg {
-                transition: all 0.5s linear;
-              }
-            }
-
-            &.expanded {
-              svg {
-                transform: rotate(-180deg);
-              }
+          &-when-checked {
+            &:has(input:checked) {
+              border-bottom: 0;
             }
           }
 
-          &-body {
-            max-height: 0;
-            transition: max-height 0.5s ease-out;
-            overflow: hidden;
-
-            &[data-parent-accordion-body] {
-              border: 1px solid #ccc;
-              border-top: 0;
-              border-bottom-left-radius: 1rem;
-              border-bottom-right-radius: 1rem;
-              padding: 0;
-
-              .ta-x-settings-menu-settings-accordion {
-                margin: 0;
-                padding: 0;
-
-                &-header {
-                  border-radius: 0;
-                }
-              }
-            }
-          }
-
-          .t-settings {
-            > div {
-              padding: 1rem 0;
-              margin: 0 1rem;
-
-              &:last-of-type {
-                border: 0;
-              }
+          &-when-unchecked {
+            &:has(input:not(:checked)) {
+              border-bottom: 0;
             }
           }
         }
       }
 
-      &-columned-setting {
-        flex-direction: column;
-        align-items: flex-start;
+      .ta-x-hide-padding-top {
+        padding-top: 0;
+      }
 
-        > div:first-of-type {
-          display: flex;
-          flex-wrap: wrap;
-          align-items: center;
-          justify-content: space-between;
+      .ta-x-tabs-content {
+        max-height: 547px;
+        height: 100%;
+        overflow-y: auto;
+        padding-bottom: 1rem;
+      }
+
+      .ta-x-settings-menu-credits-wrapper,
+      .ta-x-settings-menu-changelog-wrapper,
+      .ta-x-settings-menu-documentation-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        border: 0;
+
+        a {
           width: 100%;
-
-          > label {
-            max-width: 80%;
-          }
         }
 
-        .frm-sel {
-          padding-top: 1rem;
+        h1,
+        h2 {
+          width: 100%;
+          line-height: unset;
+        }
+
+        h1 {
+          margin-bottom: 1rem;
+        }
+
+        h2 {
+          border-top: 2px solid #0e5814;
+          border-bottom: 2px solid #0e5814;
+          padding: 0.5rem;
+          font-size: 1.6rem;
+          margin: 1rem 0;
+        }
+
+        p {
+          font-size: 1.4rem;
         }
       }
 
-      &-bottom {
+      .ta-x-settings-menu-documentation-wrapper {
+        padding-bottom: 0;
+
+        h1 {
+          &:not(:first-of-type) {
+            padding: 0.5rem 0;
+            margin-top: 1rem;
+            border-bottom: 2px solid #0552b5;
+            border-top: 2px solid #0552b5;
+          }
+        }
+
+        h2 {
+          &:first-of-type {
+            margin-top: 0;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+
+      .ta-x-settings-menu-credits-wrapper {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        h1 {
+          border-top: 2px solid #e9b949;
+          border-bottom: 2px solid #e9b949;
+          padding: 0.5rem 0;
+          margin-top: 0.5rem;
+          margin-bottom: 0;
+        }
+      }
+
+      .ta-x-settings-menu-changelog-wrapper {
+        h2 {
+          &:first-of-type {
+            margin: 0;
+          }
+        }
+
+        ul {
+          margin-bottom: 0.5rem;
+        }
+      }
+
+      .ta-x-markdown-marker {
+        flex-basis: unset;
+        align-self: center;
+        padding-right: 1rem;
+      }
+
+      .ta-x-settings-menu-bottom {
         background: #4a5568;
         position: absolute;
         bottom: 0;
@@ -328,9 +259,14 @@ body {
         }
       }
 
-      .close {
-        i {
-          pointer-events: none;
+      .labels {
+        .close {
+          width: 5rem;
+          padding: 1rem;
+
+          i {
+            pointer-events: none;
+          }
         }
       }
     }
@@ -343,23 +279,6 @@ body {
 
             a {
               background: #4299e1 !important;
-            }
-          }
-        }
-
-        .ta-x-settings-menu-settings-accordion {
-          &-header {
-            color: #ddd;
-            background: #222;
-
-            > label {
-              color: #ddd !important;
-            }
-          }
-
-          &-body {
-            &[data-parent-accordion-body] {
-              border-color: #222;
             }
           }
         }

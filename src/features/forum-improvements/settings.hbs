@@ -1,41 +1,24 @@
-<div class="ta-x-settings-menu-settings-accordion" style="padding-top: 0;">
-  {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Forum Improvements"
-    expanded=false
-    config-path="forumImprovements.enabled"
-    asCheckbox=true
-    id="chkForumImprovements"
-  }}
+{{includes
+  "@ta-x-partials/checkbox-setting.hbs"
+  label="Enable Thread Filter"
+  id="chkForumImprovementsForumImprovementsThreadFilter"
+  config-path="forumImprovements.forumImprovementsThreadFilter"
+  classes="ta-x-hide-border"
+}}
 
-  <div
-    class="ta-x-settings-menu-settings-accordion-body t-settings"
-    data-parent-accordion-body
-  >
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Enable Thread Filter"
-        id="chkForumImprovementsForumImprovementsThreadFilter"
-        config-path="forumImprovements.forumImprovementsThreadFilter"
-      }}
+{{includes
+  "@ta-x-partials/list-setting.hbs"
+  render-condition='{ "selector": "#chkForumImprovementsForumImprovementsThreadFilter", "checked": true }'
+  item-list-template="@ta-x-views/templates/forum-improvements-thread-filter-keywords.html"
+  template-id="#ta-x-template-forum-improvements-thread-filter-keywords"
+  config-path="forumImprovements.threadFilterKeywords"
+  label="Keywords"
+  id="txtThreadKeywordFilter"
+  is-array="true"
+  array-split=","
+  button-text="Add Filter"
+}}
 
-      {{includes
-        "@ta-x-partials/list-setting.hbs"
-        render-condition='{ "selector": "#chkForumImprovementsForumImprovementsThreadFilter", "checked": true }'
-        item-list-template="@ta-x-views/templates/forum-improvements-thread-filter-keywords.html"
-        template-id="#ta-x-template-forum-improvements-thread-filter-keywords"
-        config-path="forumImprovements.threadFilterKeywords"
-        label="Keywords"
-        id="txtThreadKeywordFilter"
-        is-array="true"
-        array-split=","
-        button-text="Add Filter"
-      }}
-    </div>
+{{includes "./my-threads/settings.hbs"}}
 
-    {{includes "./my-threads/settings.hbs"}}
-
-    {{includes "./walkthroughs/settings.hbs"}}
-  </div>
-</div>
+{{includes "./walkthroughs/settings.hbs"}}

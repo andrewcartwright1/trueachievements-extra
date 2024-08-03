@@ -1,5 +1,5 @@
 import { Constants } from '@ta-x-globals';
-import { allConcurrently } from '@ta-x-utilities';
+import { allConcurrently, waitForElement } from '@ta-x-utilities';
 
 export const addAchievementLeaderboardLink = async (): Promise<void> => {
   const dlcAchievementHeaders = [...document.querySelectorAll('main ul.ach-panels li:not(.heading)')] as HTMLElement[];
@@ -8,8 +8,8 @@ export const addAchievementLeaderboardLink = async (): Promise<void> => {
     'addAchievementLeaderboard - Achievements',
     dlcAchievementHeaders.map((achievement: HTMLLIElement) => ({
       name: 'add-achievement-leaderboard-achievement',
-      task: (): void => {
-        const title = achievement.querySelector('.title') as HTMLAnchorElement;
+      task: async (): Promise<void> => {
+        const title = await waitForElement('.title', achievement) as HTMLAnchorElement;
         const progress = achievement.querySelector('.progress-bar') as HTMLDivElement;
         const progressAnchor = document.createElement('a');
 

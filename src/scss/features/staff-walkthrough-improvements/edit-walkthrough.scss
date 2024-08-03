@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables';
 
 body {
   &.trueachievement-extras {
@@ -107,11 +107,11 @@ body {
           border-bottom: 1px solid #ddd;
           width: var(
             --ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-width,
-            $ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-width
+            variables.$ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-width
           );
           top: var(
             --ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-top,
-            $ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-top
+            variables.$ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-top
           ) !important;
         }
       }
@@ -147,7 +147,7 @@ body {
             &.ta-x-y-hide {
               transform: translateY(
                 calc(
-                  -1 * var(--ta-x-sticky-header-height, $ta-x-sticky-header-height)
+                  -1 * var(--ta-x-sticky-header-height, variables.$ta-x-sticky-header-height)
                 )
               );
               transition: transform 0.5s ease;
@@ -155,7 +155,7 @@ body {
               &-no-transition {
                 transform: translateY(
                   calc(
-                    -1 * var(--ta-x-sticky-header-height, $ta-x-sticky-header-height)
+                    -1 * var(--ta-x-sticky-header-height, variables.$ta-x-sticky-header-height)
                   )
                 );
               }
@@ -168,7 +168,7 @@ body {
         &.mce-floatpanel {
           top: var(
             --ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-floating-menu,
-            $ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-floating-menu
+            variables.$ta-x-staff-walkthrough-improvements-edit-walkthrough-page-sticky-tinymce-toolbar-floating-menu
           ) !important;
         }
       }

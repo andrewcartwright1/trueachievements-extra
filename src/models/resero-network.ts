@@ -33,6 +33,12 @@ export class ReseroNetwork extends ImportableGuide {
       return;
     }
 
+    const guideText = guide.guide.join('<br>');
+
+    if (guideText.length === 0) {
+      return;
+    }
+    
     const parsedTemplateDocument = new DOMParser().parseFromString(templatedAchievementGuideSolution, 'text/html');
     const parsedSvgDocument = new DOMParser()
       .parseFromString(this.guideIcon, 'text/html')

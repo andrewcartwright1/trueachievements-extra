@@ -22,7 +22,6 @@ export const waitForElement = (
       return resolve(foundElement as HTMLElement);
     }
 
-    // eslint-disable-next-line prefer-const
     let observer: MutationObserver;
 
     const timeout = setTimeout(() => {
@@ -60,7 +59,6 @@ export const waitForElements = (
       return resolve(Array.from(elements) as HTMLElement[]);
     }
 
-    // eslint-disable-next-line prefer-const
     let observer: MutationObserver;
 
     const timeout = setTimeout(() => {

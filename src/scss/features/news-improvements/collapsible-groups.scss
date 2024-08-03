@@ -1,0 +1,25 @@
+@use '../../variables';
+
+body {
+  &.trueachievement-extras {
+    .ta-x-news-improvements-sales-collapsible-groups {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .ta-x-news-improvements-sales-collapsible-groups-collapse-icon {
+        padding: 0;
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          height: 20px;
+        }
+      }
+    }
+  }
+}

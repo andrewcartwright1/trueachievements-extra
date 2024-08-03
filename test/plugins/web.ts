@@ -1,4 +1,4 @@
-import { minify } from '@minify-html/node';
+import minifyHtml from '@minify-html/node';
 import { compileString } from 'sass';
 import Handlebars from '../../build/handlebars';
 
@@ -20,7 +20,7 @@ export default () => {
   const minifyContent = (src: string): string => {
     const minifyHtmlConfig = {
       do_not_minify_doctype: false,
-      ensure_spec_compliant_unquoted_attribute_values: false,
+      ensure_spec_compliant_unquoted_attribute_values: true,
       keep_closing_tags: true,
       keep_html_and_head_opening_tags: false,
       keep_spaces_between_attributes: false,
@@ -31,7 +31,7 @@ export default () => {
       remove_processing_instructions: true
     };
 
-    const result = minify(Buffer.from(src), minifyHtmlConfig).toString();
+    const result = minifyHtml.minify(Buffer.from(src), minifyHtmlConfig).toString();
     return result;
   };
 

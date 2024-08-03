@@ -1,5 +1,6 @@
 import { TinyMCEScript } from '@ta-x-models';
 import svg from '@ta-x-svgs/code.hbs';
+import { waitForElement } from '@ta-x-utilities';
 
 class SourceCodeScript extends TinyMCEScript {
   constructor() {
@@ -49,7 +50,6 @@ class SourceCodeScript extends TinyMCEScript {
 
       const button = document.querySelector('[aria-label="Source Code"] button');
       button.classList.add('ta-x-staff-walkthrough-improvements-edit-walkthrough-page-source-code-button');
-      button.innerHTML = '${svg}';
 
       console.debug('Added Source Code Button');
     })(tinymce.activeEditor);
@@ -57,6 +57,11 @@ class SourceCodeScript extends TinyMCEScript {
 
     return this.createScript(script);
   };
+
+  afterScript = async (): Promise<void> => {
+    const button = await waitForElement('.ta-x-staff-walkthrough-improvements-edit-walkthrough-page-source-code-button');
+    button.innerHTML = svg;
+  }
 }
 
 export const addSourceCodeButton = new SourceCodeScript().injectScript;

@@ -1,49 +1,45 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkGamesImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Challenges"
+  expanded=false
+  accordion-target=".js-ta-x-settings-games-improvements-challenges"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-games-improvements-challenges t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Challenges"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Override Achievement Settings"
+    id="chkGamesImprovementsGameChallengesOverride"
+    config-path="gamesImprovements.challenges.gameChallengesOverride"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameChallengesOverride", "checked": false }'
+    helper-text="Some settings will be inherited from Achievements."
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Override Achievement Settings"
-      id="chkGamesImprovementsGameChallengesOverride"
-      config-path="gamesImprovements.challenges.gameChallengesOverride"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsGameChallengesOverride", "checked": false }'
-      helper-text="Some settings will be inherited from Achievements."
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameChallengesOverride", "checked": true }'
+    label="Show Progress As XX/XX"
+    id="chkGamesImprovementsGameChallengesIndividualProgress"
+    config-path="gamesImprovements.challenges.gameChallengesIndividualProgress"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      render-condition='{ "selector": "#chkGamesImprovementsGameChallengesOverride", "checked": true }'
-      label="Show progress as XX/XX"
-      id="chkGamesImprovementsGameChallengesIndividualProgress"
-      config-path="gamesImprovements.challenges.gameChallengesIndividualProgress"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Default Status For Game Challenges"
+    id="chkGamesImprovementsGameChallengesDefaultStatus"
+    config-path="gamesImprovements.challenges.gameChallengesDefaultStatus"
+    classes="ta-x-hide-border"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Default Status for Game Challenges"
-        id="chkGamesImprovementsGameChallengesDefaultStatus"
-        config-path="gamesImprovements.challenges.gameChallengesDefaultStatus"
-      }}
-
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameChallengesDefaultStatus", "checked": true }'
-        id="selGamesImprovementsGameChallengesDefaultStatusValue"
-        config-path="gamesImprovements.challenges.gameChallengesDefaultStatusValue"
-        options='[
-                    { "value": "rdoAllChallenges", "text": "All", "selected": true },
-                    { "value": "rdoWonChallenges", "text": "Won" },
-                    { "value": "rdoNotWonChallenges", "text": "Not Won" }]'
-      }}
-    </div>
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameChallengesDefaultStatus", "checked": true }'
+    id="selGamesImprovementsGameChallengesDefaultStatusValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    config-path="gamesImprovements.challenges.gameChallengesDefaultStatusValue"
+    options='[
+                  { "value": "rdoAllChallenges", "text": "All", "selected": true },
+                  { "value": "rdoWonChallenges", "text": "Won" },
+                  { "value": "rdoNotWonChallenges", "text": "Not Won" }]'
+  }}
+{{/includes}}

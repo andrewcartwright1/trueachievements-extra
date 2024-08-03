@@ -18,7 +18,4 @@
   "prettier.endOfLine": "auto",
   "prettier.printWidth": 120,
   "typescript.preferences.quoteStyle": "single",
-  "jest.runMode": {
-    "type": "on-demand"
-  }
 }

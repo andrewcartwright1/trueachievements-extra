@@ -1,6 +1,5 @@
 import { Constants, config } from '@ta-x-globals';
 import { ConditionalRender, ListSetting } from '@ta-x-models';
-import { pubSub } from '@ta-x-components';
 import {
   waitForElement,
   getValue,
@@ -84,19 +83,6 @@ const checkRenderConditions = (el?: HTMLElement): void => {
   });
 };
 
-const setAccordionStates = (): void => {
-  ([...extensionBody.querySelectorAll('[data-checkbox-accordion] input')] as HTMLElement[]).forEach((setting) => {
-    if (isCheckboxElement(setting)) {
-      const checkedValue = (setting as HTMLInputElement).checked;
-      const accordionParent = setting.closest('.js-ta-x-accordion');
-
-      if (checkedValue && accordionParent) {
-        pubSub.publish('accordion:toggleState', accordionParent as HTMLElement);
-      }
-    }
-  });
-};
-
 const createListElement = (listSetting: ListSetting, value: string): HTMLElement => {
   const templateListItem = listSetting.parent.querySelector(
     listSetting.parent.getAttribute('data-template-id')
@@ -119,13 +105,6 @@ const listen = (): void => {
     extensionBody.classList.add('nav-gamer');
     extensionBody.classList.remove(Constants.Styles.Base.hide);
     extensionBody.classList.add('open');
-
-    if (extensionBody.hasAttribute('data-previously-opened')) {
-      return;
-    }
-
-    extensionBody.setAttribute('data-previously-opened', '');
-    setAccordionStates();
   });
 
   extensionBody.addEventListener('click', ({ target }): void => {
@@ -159,24 +138,13 @@ const listen = (): void => {
         val.getAttribute('data-value')
       )
     );
-
-    let parentAccordionBody = target.closest('.ta-x-settings-menu-settings-accordion-body') as HTMLElement;
-    if (parentAccordionBody) {
-      pubSub.publish('accordion:setMaxHeight', parentAccordionBody);
-    }
-
-    setTimeout(() => {
-      parentAccordionBody = target.closest('[data-parent-accordion-body]') as HTMLElement;
-      if (parentAccordionBody) {
-        pubSub.publish('accordion:setMaxHeight', parentAccordionBody);
-      }
-    }, 500);
   });
 
   extensionBody.addEventListener('click', ({ target }): void => {
     if (!(target instanceof HTMLElement)) {
       return;
     }
+
     if (!target.classList.contains(Constants.Styles.SettingsMenu.closeJs)) {
       return;
     }
@@ -187,31 +155,53 @@ const listen = (): void => {
     extensionTrigger.classList.remove('active');
   });
 
-  extensionBody.addEventListener('click', ({ target }): void => {
+  extensionBody.addEventListener('click', (ev: MouseEvent): void => {
+    const target = ev.target;
+
     if (!(target instanceof HTMLElement)) {
       return;
     }
+
     if (
       !target.classList.contains(Constants.Styles.SettingsMenu.versionLink) &&
-      !target.classList.contains(Constants.Styles.SettingsMenu.documentationLink)
+      !target.classList.contains(Constants.Styles.SettingsMenu.documentationLink) &&
+      !target.classList.contains(Constants.Styles.Components.Tab.tabLink)
     ) {
       return;
     }
 
+    ev.preventDefault();
+
     const changelogView = extensionBody.querySelector(`.${Constants.Styles.SettingsMenu.changelogView}`);
     const documentationView = extensionBody.querySelector(`.${Constants.Styles.SettingsMenu.featureDocumentationView}`);
-    const settingsView = extensionBody.querySelector(`.${Constants.Styles.SettingsMenu.settingsView}`);
-    const currentView = extensionBody.querySelector(`.${Constants.Styles.SettingsMenu.settingsContentShow}`);
+    const settingsView = extensionBody.querySelector('[data-previous-tab-visible], [data-tab-visible]');
+    const currentView = extensionBody.querySelector('[data-tab-visible]');
     const nextView = target.classList.contains(Constants.Styles.SettingsMenu.versionLink)
       ? changelogView
       : documentationView;
 
-    if (currentView === nextView) {
-      nextView.classList.toggle(Constants.Styles.SettingsMenu.settingsContentShow);
-      settingsView.classList.toggle(Constants.Styles.SettingsMenu.settingsContentShow);
+    if (target.classList.contains(Constants.Styles.Components.Tab.tabLink)) {
+      if (!settingsView.hasAttribute('data-previous-tab-visible')) {
+        return;
+      }
+
+      currentView.removeAttribute('data-tab-visible');
+      settingsView.removeAttribute('data-previous-tab-visible');
+      settingsView.setAttribute('data-tab-visible', '');
+      extensionBody.querySelector(`[data-tab-id="#${settingsView.id}"`).classList.add(Constants.Styles.Components.Tab.tabSelected);
+    } else if (currentView === nextView) {
+      nextView.removeAttribute('data-tab-visible');
+      settingsView.removeAttribute('data-previous-tab-visible');
+      settingsView.setAttribute('data-tab-visible', '');
+      extensionBody.querySelector(`[data-tab-id="#${settingsView.id}"`).classList.add(Constants.Styles.Components.Tab.tabSelected);
     } else {
-      currentView.classList.toggle(Constants.Styles.SettingsMenu.settingsContentShow);
-      nextView.classList.toggle(Constants.Styles.SettingsMenu.settingsContentShow);
+      if (!settingsView.hasAttribute('data-previous-tab-visible')) {
+        settingsView.setAttribute('data-previous-tab-visible', '');
+        extensionBody.querySelector(`[data-tab-id="#${settingsView.id}"`).classList.remove(Constants.Styles.Components.Tab.tabSelected);
+      }
+
+      currentView.removeAttribute('data-tab-visible');
+      nextView.setAttribute('data-tab-visible', '');
     }
   });
 
@@ -236,18 +226,6 @@ const listen = (): void => {
     }
 
     checkRenderConditions(target);
-
-    let parentAccordionBody = target.closest('.ta-x-settings-menu-settings-accordion-body') as HTMLElement;
-    if (parentAccordionBody) {
-      pubSub.publish('accordion:setMaxHeight', parentAccordionBody);
-    }
-
-    setTimeout(() => {
-      parentAccordionBody = target.closest('[data-parent-accordion-body]') as HTMLElement;
-      if (parentAccordionBody) {
-        pubSub.publish('accordion:setMaxHeight', parentAccordionBody);
-      }
-    }, 500);
   });
 };
 

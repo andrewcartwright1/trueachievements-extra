@@ -1,48 +1,59 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkNewsImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Sales"
+  expanded=false
+  accordion-target=".js-ta-x-settings-news-improvements-sales"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-news-improvements-sales t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Sales"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Sort Sales By"
+    id="chkNewsImprovementsSalesAutoSortBy"
+    config-path="newsImprovements.sales.autoSortBy"
+    classes="ta-x-hide-border-when-checked"
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Sort Sales By"
-        id="chkNewsImprovementsSalesAutoSortBy"
-        config-path="newsImprovements.sales.autoSortBy"
-      }}
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkNewsImprovementsSalesAutoSortBy", "checked": true }'
+    id="selNewsImprovementsSalesAutoSortByValue"
+    config-path="newsImprovements.sales.autoSortByValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    helper-text="This option may not work on some tables. Let me know what you spot!"
+    helper-render-condition='{ "selector": "#selNewsImprovementsSalesAutoSortByValue", "value": "completion-time,ta-ratio" }'
+    is-array="true"
+    array-split=","
+    options='[
+        { "value": "product,game", "text": "Product", "selected": true },
+        { "value": "sale-price", "text": "Sale Price" },
+        { "value": "discount", "text": "Discount" },
+        { "value": "completion-time", "text": "Completion Time" },
+        { "value": "ta-ratio", "text": "TA Ratio" }]'
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkNewsImprovementsSalesAutoSortBy", "checked": true }'
-        id="selNewsImprovementsSalesAutoSortByValue"
-        config-path="newsImprovements.sales.autoSortByValue"
-        helper-text="This option may not work on some tables. Let me know what you spot!"
-        helper-render-condition='{ "selector": "#selNewsImprovementsSalesAutoSortByValue", "value": "completion-time,ta-ratio" }'
-        is-array="true"
-        array-split=","
-        options='[
-                        { "value": "product,game", "text": "Product", "selected": true },
-                        { "value": "sale-price", "text": "Sale Price" },
-                        { "value": "discount", "text": "Discount" },
-                        { "value": "completion-time", "text": "Completion Time" },
-                        { "value": "ta-ratio", "text": "TA Ratio" }]'
-      }}
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkNewsImprovementsSalesAutoSortBy", "checked": true }'
+    id="selNewsImprovementsSalesAutoSortByOrder"
+    config-path="newsImprovements.sales.autoSortByOrder"
+    container-classes="ta-x-hide-padding-top"
+    options='[
+        { "value": "asc", "text": "Ascendening", "selected": true },
+        { "value": "desc", "text": "Descending" }]'
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkNewsImprovementsSalesAutoSortBy", "checked": true }'
-        id="selNewsImprovementsSalesAutoSortByOrder"
-        config-path="newsImprovements.sales.autoSortByOrder"
-        options='[
-                        { "value": "asc", "text": "Ascendening", "selected": true },
-                        { "value": "desc", "text": "Descending" }]'
-      }}
-    </div>
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Hide Owned Items"
+    id="chkNewsImprovementsSalesHideOwnedItems"
+    config-path="newsImprovements.sales.hideOwnedItems"
+  }}
+
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Collapsible Groups"
+    id="chkNewsImprovementsSalesCollapsibleGroups"
+    config-path="newsImprovements.sales.collapsibleGroups"
+  }}
+{{/includes}}

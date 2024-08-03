@@ -1,25 +1,5 @@
-import { Constants } from '@ta-x-globals';
+import { pubSub } from '@ta-x-components';
 import { waitForElement } from '@ta-x-utilities';
-
-let listenApplied = false;
-
-const listen = () => {
-  document.addEventListener('click', (e: MouseEvent): void => {
-    if (!(e.target instanceof HTMLElement)) {
-      return;
-    }
-    if (!e.target.classList.contains(Constants.Styles.ForumImprovements.filterThreadsUnhideJs)) {
-      return;
-    }
-
-    e.preventDefault();
-    e.stopPropagation();
-
-    (e.target.closest('li') as HTMLLIElement).setAttribute('data-thread-hidden', 'false');
-  });
-
-  listenApplied = true;
-};
 
 export const applyThreadFilters = async (filters: string[]) => {
   if (!filters.length) {
@@ -35,6 +15,7 @@ export const applyThreadFilters = async (filters: string[]) => {
       if (activeFilter != null) {
         return;
       }
+      
       if (!threadTitleAnchor.innerText.trim().toLowerCase().includes(filter.toLowerCase())) {
         return;
       }
@@ -46,25 +27,11 @@ export const applyThreadFilters = async (filters: string[]) => {
       return;
     }
 
-    const threadLi = threadTitleAnchor.closest('li') as HTMLLIElement;
-    const threadTitleParagraph = document.createElement('p') as HTMLParagraphElement;
-    threadTitleParagraph.innerText = `Hidden by filter "${activeFilter}"`;
-    threadTitleParagraph.classList.add(Constants.Styles.ForumImprovements.filterThreadsTitleStyle);
-    (threadTitleAnchor.closest('div') as HTMLDivElement).appendChild(threadTitleParagraph);
-
-    const threadTitleUnhide = document.createElement('a') as HTMLAnchorElement;
-    threadTitleUnhide.innerText = 'Unhide';
-    threadTitleUnhide.classList.add(
-      Constants.Styles.ForumImprovements.filterThreadsUnhideStyle,
-      Constants.Styles.ForumImprovements.filterThreadsUnhideJs
-    );
-
-    threadLi.setAttribute('data-thread-hidden', 'true');
-    threadLi.appendChild(threadTitleUnhide);
-
-    if (!listenApplied) {
-      listen();
-    }
+    pubSub.publish('hideableRow:hide', {
+      element: threadTitleAnchor,
+      method: 'forum',
+      filterText: `Hidden by filter "${activeFilter}"`
+    });
   });
 };
 

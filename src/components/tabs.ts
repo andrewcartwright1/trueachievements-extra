@@ -222,19 +222,12 @@ export const tabs = (): void => {
     switchTab(target);
   });
 
-  pubSub.subscribe('tabs:set', (tab: HTMLElement) => {
-    switchTab(tab);
-  });
-
-  pubSub.subscribe('tabs:hide', (tab: HTMLElement) => {
-    hideTab(tab);
-  });
-
-  pubSub.subscribe('tabs:delete', (tab: HTMLElement) => {
-    deleteTab(tab);
-  });
+  pubSub.subscribe('tabs:set', switchTab);
+  pubSub.subscribe('tabs:hide', hideTab);
+  pubSub.subscribe('tabs:delete', deleteTab);
 
   listen();
 };
 
 export default tabs;
+ 

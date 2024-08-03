@@ -2,56 +2,59 @@ import { JSDOM, FileOptions } from 'jsdom';
 import { getPath } from '@ta-x-build-helpers';
 
 const polyFill = (jsdom: JSDOM): void => {
-  global.window = jsdom.window as unknown as Window & typeof globalThis;
-  global.document = global.window.document;
-  global.HTMLElement = global.window.HTMLElement;
-  global.HTMLInputElement = global.window.HTMLInputElement;
-  global.MutationObserver = global.window.MutationObserver;
-  global.Event = global.window.Event;
-  global.CustomEvent = global.window.CustomEvent;
-  global.Node = global.window.Node;
+  const { window } = jsdom;
 
-  class Image extends window.Image {
-    constructor() {
-      super();
+  Object.assign(global, {
+    window: window as unknown as Window & typeof globalThis,
+    document: window.document,
+    HTMLElement: window.HTMLElement,
+    HTMLInputElement: window.HTMLInputElement,
+    HTMLFormElement: window.HTMLFormElement,
+    HTMLAnchorElement: window.HTMLAnchorElement,
+    MutationObserver: window.MutationObserver,
+    FormData: window.FormData,
+    Event: window.Event,
+    CustomEvent: window.CustomEvent,
+    Node: window.Node,
+    DOMParser: window.DOMParser
+  });
 
-      Object.defineProperty(this, 'complete', {
-        get() {
-          return this.completeValue;
+  class MockImage extends window.Image {
+    constructor(width?: number, height?: number) {
+      super(width, height);
+
+      Object.defineProperties(this, {
+        complete: {
+          get: () => (this && this._complete) ?? true,
+          set: (value: boolean) => (this._complete = value),
+          configurable: true,
+          enumerable: true
         },
-        set(value: boolean) {
-          this.completeValue = value;
-        },
-        configurable: true,
-        enumerable: true
-      });
+        src: {
+          get: () => (this && this._src) ?? '',
+          set: (value: string) => {
+            this._src = value;
 
-      Object.defineProperty(this, 'src', {
-        get() {
-          return this.srcValue;
-        },
-        set(value: string) {
-          this.srcValue = value;
+            if (value === 'load-image.jpg' || value === 'error-image.jpg') {
+              this.complete = false;
 
-          if (value === 'load-image.jpg' || value === 'error-image.jpg') {
-            this.complete = false;
+              const eventName = value === 'load-image.jpg' ? 'load' : 'error';
 
-            const eventName = value === 'load-image.jpg' ? 'load' : 'error';
-
-            setTimeout(() => {
-              this.dispatchEvent(new Event(eventName));
-            }, 250);
-          } else {
-            this.complete = true;
-          }
-        },
-        configurable: true,
-        enumerable: true
-      });
+              setTimeout(() => {
+                this.dispatchEvent(new Event(eventName));
+              }, 250);
+            } else {
+              this.complete = true;
+            }
+          },
+          configurable: true,
+          enumerable: true
+        }
+      })
     }
   }
 
-  global.Image = Image;
+  vi.stubGlobal('Image', MockImage);
 };
 
 export const setHtml = async (path: string, opts?: FileOptions): Promise<void> => {

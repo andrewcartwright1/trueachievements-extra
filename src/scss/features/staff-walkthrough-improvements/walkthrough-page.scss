@@ -1,4 +1,4 @@
-@import '../../variables';
+@use '../../variables';
 
 body {
   &.trueachievement-extras {
@@ -25,14 +25,14 @@ body {
               position: relative;
               top: var(
                 --ta-x-staff-walkthrough-improvements-walkthrough-page-sticky-page-history-top,
-                $ta-x-staff-walkthrough-improvements-walkthrough-page-sticky-page-history-top
+                variables.$ta-x-staff-walkthrough-improvements-walkthrough-page-sticky-page-history-top
               );
             }
 
             &.ta-x-y-hide {
               transform: translateY(
                 calc(
-                  -1 * var(--ta-x-sticky-header-height, $ta-x-sticky-header-height)
+                  -1 * var(--ta-x-sticky-header-height, variables.$ta-x-sticky-header-height)
                 )
               );
               transition: transform 0.5s ease;
@@ -40,7 +40,7 @@ body {
               &-no-transition {
                 transform: translateY(
                   calc(
-                    -1 * var(--ta-x-sticky-header-height, $ta-x-sticky-header-height)
+                    -1 * var(--ta-x-sticky-header-height, variables.$ta-x-sticky-header-height)
                   )
                 );
               }

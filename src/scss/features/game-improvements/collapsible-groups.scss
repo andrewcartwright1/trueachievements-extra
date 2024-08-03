@@ -1,0 +1,32 @@
+@use '../../variables';
+
+body {
+  &.trueachievement-extras {
+    .ta-x-game-achievements-collapsible-groups {
+      .ta-x-game-achievements-collapsible-groups-collapse-icon {
+        padding: 0;
+        height: 28px;
+        width: 28px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 4px !important;
+
+        svg {
+          height: 20px;
+        }
+      }
+
+      [class*='ta-x-game-achievements-collapsible-groups-group-'] {
+        margin-top: -0.25rem;
+
+        .ach-panels {
+          .title {
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+}

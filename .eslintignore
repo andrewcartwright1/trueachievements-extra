@@ -1,4 +1,3 @@
-# Userscript Files
-dist
-coverage
-node_modules
+/dist
+/node_modules
+/build/empty.ts

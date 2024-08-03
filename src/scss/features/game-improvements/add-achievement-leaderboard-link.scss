@@ -1,10 +1,10 @@
-@import '../../variables.scss';
+@use '../../variables.scss';
 
 body {
   &.trueachievement-extras {
     a {
       &.ta-x-game-achievements-achievement-leaderboard-links {
-        @media (max-width: $ta-x-mobile-breakpoint-max) {
+        @media (max-width: variables.$ta-x-mobile-breakpoint-max) {
           display: none;
         }
       }
@@ -12,7 +12,7 @@ body {
 
     div {
       &.ta-x-game-achievements-achievement-leaderboard-links {
-        @media (min-width: $ta-x-tablet-breakpoint-min) {
+        @media (min-width: variables.$ta-x-tablet-breakpoint-min) {
           display: none;
         }
       }

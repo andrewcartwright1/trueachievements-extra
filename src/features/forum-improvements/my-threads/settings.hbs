@@ -1,47 +1,44 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkForumImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="My Threads"
+  expanded=false
+  accordion-target=".js-ta-x-settings-forum-improvements-my-threads"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-forum-improvements-my-threads t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="My Threads"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Override Forum Settings"
+    id="chkForumImprovementsMyThreadsForumOverride"
+    config-path="forumImprovements.myThreads.myThreadsForumOverride"
+    helper-render-condition='{ "selector": "#chkForumImprovementsMyThreadsForumOverride", "checked": false }'
+    helper-text="Some settings will be inherited from Forums."
+    classes="ta-x-hide-border-when-unchecked"
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Override Forum Settings"
-      id="chkForumImprovementsMyThreadsForumOverride"
-      config-path="forumImprovements.myThreads.myThreadsForumOverride"
-      helper-render-condition='{ "selector": "#chkForumImprovementsMyThreadsForumOverride", "checked": false }'
-      helper-text="Some settings will be inherited from Forums."
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    render-condition='{ "selector": "#chkForumImprovementsMyThreadsForumOverride", "checked": true }'
+    label="Enable Thread Filter"
+    id="chkForumImprovementsMyThreadsThreadFilter"
+    config-path="forumImprovements.myThreads.myThreadsThreadFilter"
+    classes="ta-x-hide-border"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        render-condition='{ "selector": "#chkForumImprovementsMyThreadsForumOverride", "checked": true }'
-        label="Enable Thread Filter"
-        id="chkForumImprovementsMyThreadsThreadFilter"
-        config-path="forumImprovements.myThreads.myThreadsThreadFilter"
-      }}
-
-      {{includes
-        "@ta-x-partials/list-setting.hbs"
-        render-condition='[
-                    { "selector": "#chkForumImprovementsMyThreadsForumOverride", "checked": true },
-                    { "selector": "#chkForumImprovementsMyThreadsThreadFilter", "checked": true }
-                ]'
-        item-list-template="@ta-x-views/templates/forum-improvements-thread-filter-keywords.html"
-        template-id="#ta-x-template-forum-improvements-thread-filter-keywords"
-        config-path="forumImprovements.myThreads.threadFilterKeywords"
-        label="Keywords"
-        id="txtForumImprovementsMyThreadsThreadKeywordFilter"
-        is-array="true"
-        array-split=","
-        button-text="Add Filter"
-      }}
-    </div>
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/list-setting.hbs"
+    render-condition='[
+                { "selector": "#chkForumImprovementsMyThreadsForumOverride", "checked": true },
+                { "selector": "#chkForumImprovementsMyThreadsThreadFilter", "checked": true }
+            ]'
+    item-list-template="@ta-x-views/templates/forum-improvements-thread-filter-keywords.html"
+    template-id="#ta-x-template-forum-improvements-thread-filter-keywords"
+    config-path="forumImprovements.myThreads.threadFilterKeywords"
+    label="Keywords"
+    id="txtForumImprovementsMyThreadsThreadKeywordFilter"
+    is-array="true"
+    array-split=","
+    button-text="Add Filter"
+    classes="ta-x-hide-border"
+  }}
+{{/includes}}

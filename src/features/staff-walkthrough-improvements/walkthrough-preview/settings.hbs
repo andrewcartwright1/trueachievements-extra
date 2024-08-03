@@ -1,21 +1,17 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkStaffWalkthroughImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Walkthrough Preview"
+  expanded=false
+  accordion-target=".js-ta-x-settings-staff-walkthrough-improvements-walkthrough-preview"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-staff-walkthrough-improvements-walkthrough-preview t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Walkthrough Preview"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Populate Side Column Content"
+    id="chkStaffWalkthroughImprovementsPopulateAsideContent"
+    config-path="staffWalkthroughImprovements.walkthroughPreview.populateAsideContent"
+    helper-render-condition='{ "selector": "#chkStaffWalkthroughImprovementsPopulateAsideContent", "checked": true }'
+    helper-text='This feature only supports "In Progress", "Ready for review" and "Ready for publish" walkthroughs, let me know if you want it to support others!'
   }}
-
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Populate Side Column Content"
-      id="chkStaffWalkthroughImprovementsPopulateAsideContent"
-      config-path="staffWalkthroughImprovements.walkthroughPreview.populateAsideContent"
-      helper-render-condition='{ "selector": "#chkStaffWalkthroughImprovementsPopulateAsideContent", "checked": true }'
-      helper-text='This feature only supports "In Progress", "Ready for review" and "Ready for publish" walkthroughs, let me know if you want it to support others!'
-    }}
-  </div>
-</div>
+{{/includes}}

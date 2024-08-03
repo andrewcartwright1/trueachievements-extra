@@ -1,66 +1,70 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkGamesImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Achievements"
+  expanded=false
+  accordion-target=".js-ta-x-settings-games-improvements-achievements"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-games-improvements-achievements t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Achievements"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Show Progress As XX/XX"
+    id="chkGamesImprovementsGameAchievementsIndividualProgress"
+    config-path="gamesImprovements.achievements.gameAchievementsIndividualProgress"
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Show progress as XX/XX"
-      id="chkGamesImprovementsGameAchievementsIndividualProgress"
-      config-path="gamesImprovements.achievements.gameAchievementsIndividualProgress"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Enable Game And DLC To Be Collapsible"
+    id="chkGamesImprovementsGameAchievementsCollapsibleGroups"
+    config-path="gamesImprovements.achievements.gameAchievementsCollapsibleGroups"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Default Status for Game Achievements"
-        id="chkGamesImprovementsGameAchievementsDefaultStatus"
-        config-path="gamesImprovements.achievements.gameAchievementsDefaultStatus"
-      }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Default Status For Game Achievements"
+    id="chkGamesImprovementsGameAchievementsDefaultStatus"
+    config-path="gamesImprovements.achievements.gameAchievementsDefaultStatus"
+    classes="ta-x-hide-border-when-checked"
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsDefaultStatus", "checked": true }'
-        id="selGamesImprovementsGameAchievementsDefaultStatusValue"
-        config-path="gamesImprovements.achievements.gameAchievementsDefaultStatusValue"
-        options='[
-          { "value": "rdoAllAchievements", "text": "All", "selected": true },
-          { "value": "rdoWonAchievements", "text": "Won" },
-          { "value": "rdoNotWonAchievements", "text": "Not Won" }]'
-      }}
-    </div>
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsDefaultStatus", "checked": true }'
+    id="selGamesImprovementsGameAchievementsDefaultStatusValue"
+    container-classes="ta-x-hide-padding-top"
+    config-path="gamesImprovements.achievements.gameAchievementsDefaultStatusValue"
+    options='[
+      { "value": "rdoAllAchievements", "text": "All", "selected": true },
+      { "value": "rdoWonAchievements", "text": "Won" },
+      { "value": "rdoNotWonAchievements", "text": "Not Won" }]'
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Include Guides From XboxAchievements.com"
-      id="chkGamesImprovementsGameAchievementsShowXboxAchievementGuides"
-      config-path="gamesImprovements.achievements.gameAchievementsShowXboxAchievementGuides"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsShowXboxAchievementGuides", "checked": true }'
-      helper-text="This feature is tempermental, let me know if you have any issues!"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Include Guides From XboxAchievements.com"
+    id="chkGamesImprovementsGameAchievementsShowXboxAchievementGuides"
+    config-path="gamesImprovements.achievements.gameAchievementsShowXboxAchievementGuides"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsShowXboxAchievementGuides", "checked": true }'
+    helper-text="This feature is tempermental, let me know if you have any issues!"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Include Guides From PlaystationTrophies.org"
-      id="chkGamesImprovementsGameAchievementsShowPlaystationTrophyGuides"
-      config-path="gamesImprovements.achievements.gameAchievementsShowPlaystationTrophyGuides"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsShowPlaystationTrophyGuides", "checked": true }'
-      helper-text="This feature is tempermental, let me know if you have any issues!"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Include Guides From PlaystationTrophies.org"
+    id="chkGamesImprovementsGameAchievementsShowPlaystationTrophyGuides"
+    config-path="gamesImprovements.achievements.gameAchievementsShowPlaystationTrophyGuides"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsShowPlaystationTrophyGuides", "checked": true }'
+    helper-text="This feature is tempermental, let me know if you have any issues!"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Include Guides From GamertagNation.com"
-      id="chkGamesImprovementsGameAchievementsShowGamertagNationGuides"
-      config-path="gamesImprovements.achievements.gameAchievementsShowGamertagNationGuides"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsShowGamertagNationGuides", "checked": true }'
-      helper-text="This feature is tempermental, let me know if you have any issues!"
-    }}
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Include Guides From GamertagNation.com"
+    id="chkGamesImprovementsGameAchievementsShowGamertagNationGuides"
+    config-path="gamesImprovements.achievements.gameAchievementsShowGamertagNationGuides"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameAchievementsShowGamertagNationGuides", "checked": true }'
+    helper-text="This feature is tempermental, let me know if you have any issues!"
+    classes="ta-x-hide-border"
+  }}
+{{/includes}}

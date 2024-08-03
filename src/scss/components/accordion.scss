@@ -1,0 +1,26 @@
+body {
+  &.trueachievement-extras {
+    .ta-x-accordion {
+      svg {
+        pointer-events: none;
+      }
+
+      &.collapsed {
+        svg {
+          transition: all 0.5s linear;
+        }
+      }
+
+      &.expanded {
+        svg {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+
+    .ta-x-accordion-content {
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+  }
+}

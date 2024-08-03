@@ -1,4 +1,4 @@
-@import 'variables';
+@use 'variables';
 
 :root {
   --ta-x-sticky-header-height: $ta-x-sticky-header-height;
@@ -29,7 +29,7 @@ body {
         max-width: 1200px;
       }
 
-      @media (min-width: $ta-x-tablet-breakpoint-min) {
+      @media (min-width: variables.$ta-x-tablet-breakpoint-min) {
         .news-section {
           &.list {
             > section {

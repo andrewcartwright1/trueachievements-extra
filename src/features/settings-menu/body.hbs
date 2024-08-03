@@ -2,60 +2,120 @@
   <i class="fa fa-wrench"></i>
 </div>
 
-<div class="js-ta-x-settings-menu ta-x-settings-menu ta-x-hide">
+<div class="js-ta-x-settings-menu js-ta-x-tabs ta-x-settings-menu ta-x-hide">
   <div class="middle">
     <div class="wrap">
       <div class="labels">
+        <ul
+          class="tabs-nav ta-x-tabs-link-container js-ta-x-tabs-link-container"
+        >
+          <li
+            class="js-ta-x-tabs-link ta-x-tabs-selected ta-x-tabs-link"
+            data-tab-id="#ta-x-tabs-miscellaneous-improvements"
+          >
+            Misc Improvements
+          </li>
+          <li
+            class="js-ta-x-tabs-link ta-x-tabs-link"
+            data-tab-id="#ta-x-tabs-forum-improvements"
+          >
+            Forum Improvements
+          </li>
+          <li
+            class="js-ta-x-tabs-link ta-x-tabs-link"
+            data-tab-id="#ta-x-tabs-gamer-improvements"
+          >
+            Gamer Improvements
+          </li>
+          <li
+            class="js-ta-x-tabs-link ta-x-tabs-link"
+            data-tab-id="#ta-x-tabs-games-improvements"
+          >
+            Games Improvements
+          </li>
+          <li
+            class="js-ta-x-tabs-link ta-x-tabs-link"
+            data-tab-id="#ta-x-tabs-news-improvements"
+          >
+            News Improvements
+          </li>
+          <li
+            class="js-ta-x-tabs-link ta-x-tabs-link"
+            data-tab-id="#ta-x-tabs-staff-walkthrough-improvements"
+          >
+            Staff Walkthrough Improvements
+          </li>
+        </ul>
         <label class="js-ta-x-settings-menu-close close">
           <i class="fa fa-close"></i>
         </label>
       </div>
       <div class="contents">
-        <div class="contents open ta-x-settings-menu-settings">
-          <div
-            class="t-settings js-ta-x-settings-menu-settings ta-x-settings-menu-settings-item ta-x-settings-menu-settings-item-show"
-          >
-            {{includes "@ta-x-features/sticky-header/settings.hbs"}}
-
-            {{includes "@ta-x-features/emojis/settings.hbs"}}
-
-            {{includes "@ta-x-features/forum-improvements/settings.hbs"}}
-
-            {{includes "@ta-x-features/gamer-improvements/settings.hbs"}}
-
-            {{includes "@ta-x-features/games-improvements/settings.hbs"}}
-
-            {{includes "@ta-x-features/news-improvements/settings.hbs"}}
-
-            {{includes
-              "@ta-x-features/staff-walkthrough-improvements/settings.hbs"
-            }}
-          </div>
-          <div
-            class="t-settings js-ta-x-settings-menu-changelog ta-x-settings-menu-settings-item"
-          >
-            {{changelog
-              (markdown
-                "@ta-x-project-root/CHANGELOG.md"
-                false
-                "ta-x-settings-menu-changelog-wrapper"
-              )
-            }}
-            {{markdown
-              "@ta-x-project-root/CREDITS.md"
-              true
-              "ta-x-settings-menu-credits-wrapper"
-            }}
-          </div>
-          <div
-            class="t-settings js-ta-x-settings-menu-feature-documentation ta-x-settings-menu-settings-item"
-          >
-            {{markdown
-              "@ta-x-project-root/FEATURE-DOCUMENTATION.md"
-              true
-              "ta-x-settings-menu-documentation-wrapper"
-            }}
-          </div>
+        <div
+          id="ta-x-tabs-miscellaneous-improvements"
+          class="js-ta-x-tabs-content ta-x-tabs-content t-settings"
+          data-tab-visible
+        >
+          {{includes "@ta-x-features/miscellaneous-improvements/settings.hbs"}}
+        </div>
+        <div
+          id="ta-x-tabs-forum-improvements"
+          class="js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{includes "@ta-x-features/forum-improvements/settings.hbs"}}
+        </div>
+        <div
+          id="ta-x-tabs-gamer-improvements"
+          class="js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{includes "@ta-x-features/gamer-improvements/settings.hbs"}}
+        </div>
+        <div
+          id="ta-x-tabs-games-improvements"
+          class="js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{includes "@ta-x-features/games-improvements/settings.hbs"}}
+        </div>
+        <div
+          id="ta-x-tabs-news-improvements"
+          class="js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{includes "@ta-x-features/news-improvements/settings.hbs"}}
+        </div>
+        <div
+          id="ta-x-tabs-staff-walkthrough-improvements"
+          class="js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{includes
+            "@ta-x-features/staff-walkthrough-improvements/settings.hbs"
+          }}
+        </div>
+        <div
+          id="ta-x-tabs-changelog-credits"
+          class="js-ta-x-settings-menu-changelog js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{changelog
+            (markdown
+              "@ta-x-project-root/CHANGELOG.md"
+              false
+              "ta-x-settings-menu-changelog-wrapper"
+            )
+          }}
+          {{markdown
+            "@ta-x-project-root/CREDITS.md"
+            true
+            "ta-x-settings-menu-credits-wrapper"
+          }}
+        </div>
+        <div
+          id="ta-x-tabs-feature-documentation"
+          class="js-ta-x-settings-menu-feature-documentation js-ta-x-tabs-content ta-x-tabs-content t-settings"
+        >
+          {{markdown
+            "@ta-x-project-root/FEATURE-DOCUMENTATION.md"
+            true
+            "ta-x-settings-menu-documentation-wrapper"
+          }}
         </div>
         <div class="t-settings open ta-x-settings-menu-bottom">
           <ul class="list-links buttons">

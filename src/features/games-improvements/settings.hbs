@@ -1,35 +1,19 @@
-<div class="ta-x-settings-menu-settings-accordion">
-  {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Games Improvements"
-    expanded=false
-    config-path="gamesImprovements.enabled"
-    asCheckbox=true
-    id="chkGamesImprovements"
-  }}
+{{includes
+  "@ta-x-partials/checkbox-setting.hbs"
+  label="Add Highlight Games Not In Collection Button"
+  id="chkGamesImprovementsHighlightGamesNotInCollectionButton"
+  config-path="gamesImprovements.games.addHighlightGamesNotInCollectionButton"
+  helper-render-condition='{ "selector": "#chkGamesImprovementsHighlightGamesNotInCollectionButton", "checked": true }'
+  helper-text="This feature is unstyled, let me know if you have any ideas for how to make this look!"
+  classes="ta-x-hide-border"
+}}
 
-  <div
-    class="ta-x-settings-menu-settings-accordion-body t-settings"
-    data-parent-accordion-body
-  >
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Add Highlight Games Not In Collection Button"
-      id="chkGamesImprovementsHighlightGamesNotInCollectionButton"
-      config-path="gamesImprovements.games.addHighlightGamesNotInCollectionButton"
-      style="border: 0;"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsHighlightGamesNotInCollectionButton", "checked": true }'
-      helper-text="This feature is unstyled, let me know if you have any ideas for how to make this look!"
-    }}
+{{includes "./achievements/settings.hbs"}}
 
-    {{includes "./achievements/settings.hbs"}}
+{{includes "./challenges/settings.hbs"}}
 
-    {{includes "./challenges/settings.hbs"}}
+{{includes "./clips/settings.hbs"}}
 
-    {{includes "./clips/settings.hbs"}}
+{{includes "./dlc/settings.hbs"}}
 
-    {{includes "./dlc/settings.hbs"}}
-
-    {{includes "./forums/settings.hbs"}}
-  </div>
-</div>
+{{includes "./forums/settings.hbs"}}

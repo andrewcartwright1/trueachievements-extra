@@ -1,48 +1,57 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkGamesImprovements", "checked": true }'
->
-  {{includes "@ta-x-partials/accordion-header.hbs" title="DLC" expanded=false}}
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="DLC"
+  expanded=false
+  accordion-target=".js-ta-x-settings-games-improvements-dlc"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-games-improvements-dlc t-settings"
+}}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Override Achievement Settings"
+    id="chkGamesImprovementsGameDLCOverride"
+    config-path="gamesImprovements.dlc.gameDLCOverride"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": false }'
+    helper-text="Some settings will be inherited from Achievements."
+    classes="ta-x-hide-border-when-unchecked"
+  }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Override Achievement Settings"
-      id="chkGamesImprovementsGameDLCOverride"
-      config-path="gamesImprovements.dlc.gameDLCOverride"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": false }'
-      helper-text="Some settings will be inherited from Achievements."
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true }'
+    label="Show Progress As XX/XX"
+    id="chkGamesImprovementsGameDLCIndividualProgress"
+    config-path="gamesImprovements.dlc.gameDLCIndividualProgress"
+  }}
 
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true }'
-      label="Show progress as XX/XX"
-      id="chkGamesImprovementsGameDLCIndividualProgress"
-      config-path="gamesImprovements.dlc.gameDLCIndividualProgress"
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true }'
+    label="Enable DLC To Be Collapsible"
+    id="chkGamesImprovementsGameDLCCollapsibleGroups"
+    config-path="gamesImprovements.dlc.gameDLCCollapsibleGroups"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true }'
-        label="Default Status for Game DLC Achievements"
-        id="chkGamesImprovementsGameDLCDefaultStatus"
-        config-path="gamesImprovements.dlc.gameDLCDefaultStatus"
-      }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true }'
+    label="Default Status For Game DLC Achievements"
+    id="chkGamesImprovementsGameDLCDefaultStatus"
+    config-path="gamesImprovements.dlc.gameDLCDefaultStatus"
+    classes="ta-x-hide-border"
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='[
-                { "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true },
-                { "selector": "#chkGamesImprovementsGameDLCDefaultStatus", "checked": true }]'
-        id="selGamesImprovementsGameDLCDefaultStatusValue"
-        config-path="gamesImprovements.dlc.gameDLCDefaultStatusValue"
-        options='[
-                    { "value": "rdoAllAchievements", "text": "All", "selected": true },
-                    { "value": "rdoWonAchievements", "text": "Won" },
-                    { "value": "rdoNotWonAchievements", "text": "Not Won" }]'
-      }}
-    </div>
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='[
+              { "selector": "#chkGamesImprovementsGameDLCOverride", "checked": true },
+              { "selector": "#chkGamesImprovementsGameDLCDefaultStatus", "checked": true }]'
+    id="selGamesImprovementsGameDLCDefaultStatusValue"
+    config-path="gamesImprovements.dlc.gameDLCDefaultStatusValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    options='[
+                  { "value": "rdoAllAchievements", "text": "All", "selected": true },
+                  { "value": "rdoWonAchievements", "text": "Won" },
+                  { "value": "rdoNotWonAchievements", "text": "Not Won" }]'
+  }}
+{{/includes}}

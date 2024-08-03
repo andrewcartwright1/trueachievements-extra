@@ -1,7 +1,8 @@
-import type { LoaderContext } from 'webpack';
+import { LoaderContext } from '@rspack/core';
 
-export default function (this: LoaderContext<unknown>, source: string) {
-  return `const styles = \`${source}\`;
+export default async function (this: LoaderContext<unknown>, content: string) {
+  return `
+    const styles = \`${content}\`;
     export default styles;
   `;
 }

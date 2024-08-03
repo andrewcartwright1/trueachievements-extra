@@ -14,7 +14,7 @@ export const getUrlProperties = (str: string, props: string | string[] = []) => 
     }
 
     return constructedString;
-  } catch (ex) {
+  } catch {
     throw `${str} is not a valid url`;
   }
 };
@@ -36,6 +36,7 @@ const gameForumUrlWithAll = new RegExp('^/game/.*/forum\\?type=all', 'i');
 const gameForumUrlWithCommunity = new RegExp('^/game/.*/forum\\?type=community', 'i');
 const gameForumUrlWithGameInfo = new RegExp('^/game/.*/forum\\?type=gameinfo', 'i');
 const reviewsUrl = new RegExp('^/game/.*/review$', 'i');
+const productUrl = new RegExp('^/products/[0-9]*/.*$', 'i');
 const gamesUrl = new RegExp('^/games.aspx', 'i');
 const gameUrl = new RegExp('^/game/.*$', 'i');
 const editWalkthroughUrl = new RegExp('^/staff/walkthrough/editwalkthroughpage.aspx', 'i');
@@ -64,6 +65,7 @@ const pollUrl = new RegExp('^/poll/[0-9]*/*', 'i');
 const newsUrl = new RegExp('^/n[0-9]*/*', 'i');
 const gamerUrl = new RegExp('^/gamer/.*$', 'i');
 const gamerAchievementsUrl = new RegExp('^/gamer/.*/achievements$', 'i');
+const winXboxGamesUrl = new RegExp('^/win-xbox-games', 'i');
 
 const xboxAchievementsGuide = new RegExp('^/game/.*/guide((/$)|$)', 'i');
 const playstationTrophiesGuide = new RegExp('^/game/.*/guide((/$)|$)', 'i');
@@ -95,6 +97,13 @@ export const GamesRegex = {
   gamesUrl,
   reviewsUrl,
   walkthroughUrl,
+  Extract: {
+    gameName: (str: string = window.location.href): string =>
+      getUrlProperties(str, 'pathname').match(/(?<=\/game\/)[^/]+/)[0],
+
+    dlcName: (str: string = window.location.href): string =>
+      getUrlProperties(str, 'pathname').match(/(?<=\/dlc\/)[^/]+/)[0]
+  },
   Test: {
     dlc: (str: string = window.location.href): boolean =>
       dlcUrl.test(getUrlProperties(str, 'pathname')) || individualDlcUrl.test(getUrlProperties(str, 'pathname')),
@@ -229,6 +238,13 @@ export const NewsRegex = {
   }
 };
 
+export const ProductRegex = {
+  productUrl,
+  Test: {
+    productUrl: (str: string = window.location.href): boolean => productUrl.test(getUrlProperties(str, 'pathname'))
+  }
+};
+
 export const DatesRegex = {
   today: new RegExp('Today', 'i'),
   yesterday: new RegExp('Yesterday', 'i')
@@ -256,6 +272,15 @@ export const ExternalRegex = {
   }
 };
 
+export const MiscellaneousRegex = {
+  winXboxGamesUrl,
+
+  Test: {
+    winXboxGamesUrl: (str: string = window.location.href): boolean =>
+      winXboxGamesUrl.test(getUrlProperties(str, 'pathname'))
+  }
+};
+
 export default {
   AchievementsRegex,
   GamesRegex,
@@ -265,5 +290,7 @@ export default {
   DatesRegex,
   SentencesRegex,
   NewsRegex,
-  ExternalRegex
+  ProductRegex,
+  ExternalRegex,
+  MiscellaneousRegex
 };

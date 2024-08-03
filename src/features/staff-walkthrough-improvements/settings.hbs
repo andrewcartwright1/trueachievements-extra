@@ -1,23 +1,7 @@
-<div class="ta-x-settings-menu-settings-accordion">
-  {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Staff Walkthrough Improvements"
-    expanded=false
-    config-path="staffWalkthroughImprovements.enabled"
-    asCheckbox=true
-    id="chkStaffWalkthroughImprovements"
-  }}
+{{includes "./edit-walkthrough/settings.hbs"}}
 
-  <div
-    class="ta-x-settings-menu-settings-accordion-body t-settings"
-    data-parent-accordion-body
-  >
-    {{includes "./edit-walkthrough/settings.hbs"}}
+{{includes "./manage-walkthrough/settings.hbs"}}
 
-    {{includes "./manage-walkthrough/settings.hbs"}}
+{{includes "./walkthrough-page/settings.hbs"}}
 
-    {{includes "./walkthrough-page/settings.hbs"}}
-
-    {{includes "./walkthrough-preview/settings.hbs"}}
-  </div>
-</div>
+{{includes "./walkthrough-preview/settings.hbs"}}

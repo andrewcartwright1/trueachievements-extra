@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs-extra';
+import fs from 'fs';
 import { getPath } from '@ta-x-build-helpers';
 import { setHtml, createInnerTextSpies } from '@ta-x-test';
 import { Cache, Constants, AchievementsRegex, gameAchievements as config } from '@ta-x-globals';
@@ -145,7 +145,7 @@ describe('games-improvements/achievement/add-playstation-trophy-guides', () => {
     vi.spyOn(AchievementsRegex.Test, 'achievementUrl').mockReturnValueOnce(true);
 
     const memoizeCorsFetchSpy = vi.spyOn(taxHelpers, 'memoizeCorsFetch');
-    memoizeCorsFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView)).toString());
+    memoizeCorsFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView), 'utf8'));
 
     await addPlaystationTrophyGuides();
 
@@ -204,7 +204,7 @@ describe('games-improvements/achievement/add-playstation-trophy-guides', () => {
     vi.spyOn(Cache, 'gameAchievementsPlaystationTrophiesGuideUrl', 'get').mockReturnValueOnce(cachedGuide);
 
     const memoizeCorsFetchSpy = vi.spyOn(taxHelpers, 'memoizeCorsFetch');
-    memoizeCorsFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView)).toString());
+    memoizeCorsFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView), 'utf8'));
 
     await addPlaystationTrophyGuides();
 

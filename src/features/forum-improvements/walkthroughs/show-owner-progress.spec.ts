@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs-extra';
+import fs from 'fs';
 import { getPath } from '@ta-x-build-helpers';
 import { setHtml, createInnerTextSpies } from '@ta-x-test';
 import { Cache, Constants, ForumRegex, forumImprovements as config } from '@ta-x-globals';
@@ -189,7 +189,7 @@ describe('forum-improvements/walkthroughs/show-owner-progress', () => {
     vi.spyOn(taxUtilities, 'waitForElement').mockResolvedValueOnce(titleElement);
 
     const memoizeFetchSpy = vi.spyOn(taxHelpers, 'memoizeFetch');
-    memoizeFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView)).toString());
+    memoizeFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView), 'utf8'));
 
     await showOwnerProgress();
 
@@ -249,7 +249,7 @@ describe('forum-improvements/walkthroughs/show-owner-progress', () => {
     vi.spyOn(taxUtilities, 'waitForElement').mockResolvedValueOnce(titleElement);
 
     const memoizeFetchSpy = vi.spyOn(taxHelpers, 'memoizeFetch');
-    memoizeFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView)).toString());
+    memoizeFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView), 'utf8'));
 
     await showOwnerProgress();
 

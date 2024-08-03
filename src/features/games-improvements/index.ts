@@ -1,4 +1,3 @@
-import { gamesImprovements } from '@ta-x-globals';
 import { allConcurrently } from '@ta-x-utilities';
 import { addHighlightGamesNotInCollectionButton } from './add-highlight-games-not-in-collection-button';
 import achievement from './achievement';
@@ -11,10 +10,6 @@ import news from './news';
 import reviews from './reviews';
 
 export default async (): Promise<void> => {
-  if (!gamesImprovements.enabled) {
-    return;
-  }
-
   allConcurrently('Games Improvements', [
     {
       name: 'games-improvements-add-highlight-games-button',

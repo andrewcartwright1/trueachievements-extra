@@ -1,0 +1,20 @@
+<div
+  class="ta-x-accordion js-ta-x-accordion
+    {{accordion-header-classes}}
+    {{ternary expanded 'collapsed expanded' 'collapsed'}}"
+  data-accordion-target="{{accordion-target}}"
+>
+  <span>
+    {{title}}
+  </span>
+
+  {{includes "@ta-x-svgs/chevron-down.hbs"}}
+</div>
+
+<div
+  class="ta-x-accordion-content js-ta-x-accordion-content
+    {{accordion-content-classes}}"
+  style="{{ternary expanded 'max-height: 100%;' 'max-height: 0px;'}}"
+>
+  {{{partialContent}}}
+</div>

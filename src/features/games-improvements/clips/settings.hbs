@@ -1,69 +1,68 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkGamesImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Clips"
+  expanded=false
+  accordion-target=".js-ta-x-settings-games-improvements-clips"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-games-improvements-clips t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Clips"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Default Status for Game Clips"
+    id="chkGamesImprovementsGameClipsDefaultStatus"
+    config-path="gamesImprovements.clips.gameClipsDefaultStatus"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
+    helper-text="This feature will cause multiple page reloads if you change more than one default!"
+    classes="ta-x-hide-border"
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Default Status for Game Clips"
-        id="chkGamesImprovementsGameClipsDefaultStatus"
-        config-path="gamesImprovements.clips.gameClipsDefaultStatus"
-        helper-render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
-        helper-text="This feature will cause multiple page reloads if you change more than one default!"
-      }}
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
+    id="selGamesImprovementsGameClipsDefaultRecordedByValue"
+    config-path="gamesImprovements.clips.gameClipsDefaultRecordedByValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    options='[
+                { "value": "", "text": "Anyone", "selected": true },
+                { "value": "My friends", "text": "My friends" }]'
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
-        id="selGamesImprovementsGameClipsDefaultRecordedByValue"
-        config-path="gamesImprovements.clips.gameClipsDefaultRecordedByValue"
-        options='[
-                    { "value": "", "text": "Anyone", "selected": true },
-                    { "value": "My friends", "text": "My friends" }]'
-      }}
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
+    id="selGamesImprovementsGameClipsDefaultSavedByValue"
+    config-path="gamesImprovements.clips.gameClipsDefaultSavedByValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    options='[
+                { "value": "", "text": "Anyone" },
+                { "value": "Gamer", "text": "Gamer", "selected": true },
+                { "value": "Xbox", "text": "Xbox" }]'
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
-        id="selGamesImprovementsGameClipsDefaultSavedByValue"
-        config-path="gamesImprovements.clips.gameClipsDefaultSavedByValue"
-        options='[
-                    { "value": "", "text": "Anyone" },
-                    { "value": "Gamer", "text": "Gamer", "selected": true },
-                    { "value": "Xbox", "text": "Xbox" }]'
-      }}
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
+    id="selGamesImprovementsGameClipsDefaultRecordedValue"
+    config-path="gamesImprovements.clips.gameClipsDefaultRecordedValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    options='[
+                { "value": "7", "text": "This week", "selected": true },
+                { "value": "30", "text": "This month" },
+                { "value": "365", "text": "This year" },
+                { "value": "0", "text": "All" }]'
+  }}
 
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
-        id="selGamesImprovementsGameClipsDefaultRecordedValue"
-        config-path="gamesImprovements.clips.gameClipsDefaultRecordedValue"
-        options='[
-                    { "value": "7", "text": "This week", "selected": true },
-                    { "value": "30", "text": "This month" },
-                    { "value": "365", "text": "This year" },
-                    { "value": "0", "text": "All" }]'
-      }}
-
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
-        id="selGamesImprovementsGameClipsDefaultSortByValue"
-        config-path="gamesImprovements.clips.gameClipsDefaultSortByValue"
-        options='[
-                    { "value": "Most viewed", "text": "Most viewed", "selected": true },
-                    { "value": "Most favourited", "text": "Most favourited" },
-                    { "value": "Most commented", "text": "Most commented" },
-                    { "value": "Longest", "text": "Longest" },
-                    { "value": "GamerTag", "text": "GamerTag" }]'
-      }}
-    </div>
-  </div>
-</div>
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameClipsDefaultStatus", "checked": true }'
+    id="selGamesImprovementsGameClipsDefaultSortByValue"
+    config-path="gamesImprovements.clips.gameClipsDefaultSortByValue"
+    container-classes="ta-x-hide-padding-top ta-x-hide-border"
+    options='[
+                { "value": "Most viewed", "text": "Most viewed", "selected": true },
+                { "value": "Most favourited", "text": "Most favourited" },
+                { "value": "Most commented", "text": "Most commented" },
+                { "value": "Longest", "text": "Longest" },
+                { "value": "GamerTag", "text": "GamerTag" }]'
+  }}
+{{/includes}}

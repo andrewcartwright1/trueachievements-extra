@@ -1,6 +1,8 @@
 <div
   data-render-condition="{{render-condition}}"
-  class="ta-x-checkbox {{conditional (object ta-x-hide=render-condition)}}"
+  class="ta-x-checkbox
+    {{conditional (object ta-x-hide=render-condition)}}
+    {{classes}}"
   style="{{style}}"
 >
   <label>
@@ -19,10 +21,9 @@
     </label>
   </div>
   {{#if helper-text}}
-    <div class="ta-x-flex-break"></div>
     <p
       data-render-condition="{{helper-render-condition}}"
-      class="ta-x-checkbox-help-text
+      class="ta-x-settings-helper-text
         {{conditional (object ta-x-hide=helper-render-condition)}}"
     >
       {{helper-text}}

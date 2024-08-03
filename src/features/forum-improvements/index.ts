@@ -1,13 +1,10 @@
 import { waitForElement, allConcurrently } from '@ta-x-utilities';
-import { Constants, ForumRegex, forumImprovements } from '@ta-x-globals';
+import { Constants, ForumRegex } from '@ta-x-globals';
 import myThreads from './my-threads';
 import viewBoard from './view-board';
 import walkthroughs from './walkthroughs';
 
 export default async (): Promise<void> => {
-  if (!forumImprovements.enabled) {
-    return;
-  }
   if (!ForumRegex.Test.all()) {
     return;
   }

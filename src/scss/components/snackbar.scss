@@ -9,7 +9,7 @@ body {
       border-radius: 1.5rem;
       padding: 16px;
       position: fixed;
-      z-index: 1;
+      z-index: 2;
       left: 50%;
       bottom: 30px;
 
@@ -22,6 +22,7 @@ body {
 
       h2 {
         color: #bbb;
+        padding-left: 1rem;
         border-left: 3px solid #3f67a4;
 
         &.warning {

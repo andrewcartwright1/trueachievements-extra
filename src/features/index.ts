@@ -1,6 +1,5 @@
 export { default as SettingsMenu } from './settings-menu';
-export { default as StickyHeader } from './sticky-header';
-export { default as Emojis } from './emojis';
+export { default as MiscellaneousImprovements } from './miscellaneous-improvements';
 export { default as StaffWalkthroughImprovements } from './staff-walkthrough-improvements';
 export { default as ForumImprovements } from './forum-improvements';
 export { default as NewsImprovements } from './news-improvements';

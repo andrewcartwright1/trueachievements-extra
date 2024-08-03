@@ -32,7 +32,10 @@
       "@ta-x-project-root/*": ["../*"],
       "@ta-x-test": ["../test/index"],
       "@ta-x-test-views/*": ["../test/html/*"]
-    },
-    "types": ["vitest/globals"]
-  }
+    }
+  },
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.test.json" }
+  ]
 }

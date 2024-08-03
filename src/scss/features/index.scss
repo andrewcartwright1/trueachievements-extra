@@ -1,6 +1,7 @@
-@import './settings-menu';
-@import './sticky-header';
-@import './emojis';
-@import './staff-walkthrough-improvements/index';
-@import './forum-improvements/index';
-@import './game-improvements/index';
+@use 'settings-menu';
+@use 'sticky-header';
+@use 'emojis';
+@use 'staff-walkthrough-improvements';
+@use 'forum-improvements';
+@use 'game-improvements';
+@use 'news-improvements';

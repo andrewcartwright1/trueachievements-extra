@@ -39,7 +39,7 @@ export class MemoizedFetch {
 
       this.expiryTime = parsedObj.expiryTime;
       this.response = parsedObj.response;
-    } catch (e) {
+    } catch {
       // Do nothing
     }
   }

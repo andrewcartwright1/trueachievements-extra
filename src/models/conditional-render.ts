@@ -32,7 +32,7 @@ export class ConditionalRender {
       conditionalRender.selector = obj.selector;
       conditionalRender.checked = toBool(obj.checked);
       conditionalRender.value = obj.value ? obj.value.split(',') : null;
-    } catch (e) {
+    } catch {
       conditionalRender.conditions = null;
       conditionalRender.selector = null;
       conditionalRender.checked = null;

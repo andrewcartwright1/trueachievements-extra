@@ -1,67 +1,62 @@
-<div
-  class="ta-x-settings-menu-settings-accordion"
-  data-render-condition='{ "selector": "#chkGamesImprovements", "checked": true }'
->
+{{#includes
+  "@ta-x-partials/accordion.hbs"
+  title="Forums"
+  expanded=false
+  accordion-target=".js-ta-x-settings-games-improvements-forums"
+  accordion-header-classes="labels"
+  accordion-content-classes="js-ta-x-settings-games-improvements-forums t-settings"
+}}
   {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Forums"
-    expanded=false
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Override Forum Settings"
+    id="chkGamesImprovementsGameForumsForumOverride"
+    config-path="gamesImprovements.forums.gameForumsForumOverride"
+    helper-render-condition='{ "selector": "#chkGamesImprovementsGameForumsForumOverride", "checked": false }'
+    helper-text="Some settings will be inherited from Forums."
   }}
 
-  <div class="ta-x-settings-menu-settings-accordion-body t-settings">
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Override Forum Settings"
-      id="chkGamesImprovementsGameForumsForumOverride"
-      config-path="gamesImprovements.forums.gameForumsForumOverride"
-      helper-render-condition='{ "selector": "#chkGamesImprovementsGameForumsForumOverride", "checked": false }'
-      helper-text="Some settings will be inherited from Forums."
-    }}
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameForumsForumOverride", "checked": true }'
+    label="Enable Thread Filter"
+    id="chkGameImprovementsGameForumsThreadFilter"
+    config-path="gamesImprovements.forums.gameForumsThreadFilter"
+    classes="ta-x-hide-border-when-checked"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameForumsForumOverride", "checked": true }'
-        label="Enable Thread Filter"
-        id="chkGameImprovementsGameForumsThreadFilter"
-        config-path="gamesImprovements.forums.gameForumsThreadFilter"
-      }}
+  {{includes
+    "@ta-x-partials/list-setting.hbs"
+    render-condition='[
+                { "selector": "#chkGamesImprovementsGameForumsForumOverride", "checked": true },
+                { "selector": "#chkGameImprovementsGameForumsThreadFilter", "checked": true }
+            ]'
+    item-list-template="@ta-x-views/templates/forum-improvements-thread-filter-keywords.html"
+    template-id="#ta-x-template-forum-improvements-thread-filter-keywords"
+    config-path="gamesImprovements.forums.threadFilterKeywords"
+    label="Keywords"
+    id="txtGameImprovementsGameForumsThreadKeywordFilter"
+    is-array="true"
+    array-split=","
+    button-text="Add Filter"
+  }}
 
-      {{includes
-        "@ta-x-partials/list-setting.hbs"
-        render-condition='[
-                    { "selector": "#chkGamesImprovementsGameForumsForumOverride", "checked": true },
-                    { "selector": "#chkGameImprovementsGameForumsThreadFilter", "checked": true }
-                ]'
-        item-list-template="@ta-x-views/templates/forum-improvements-thread-filter-keywords.html"
-        template-id="#ta-x-template-forum-improvements-thread-filter-keywords"
-        config-path="gamesImprovements.forums.threadFilterKeywords"
-        label="Keywords"
-        id="txtGameImprovementsGameForumsThreadKeywordFilter"
-        is-array="true"
-        array-split=","
-        button-text="Add Filter"
-      }}
-    </div>
+  {{includes
+    "@ta-x-partials/checkbox-setting.hbs"
+    label="Default Thread Type for Game Forums"
+    id="chkGamesImprovementsGameForumsDefaultThread"
+    config-path="gamesImprovements.forums.gameForumsDefaultThread"
+    classes="ta-x-hide-border-when-checked"
+  }}
 
-    <div class="ta-x-settings-menu-columned-setting">
-      {{includes
-        "@ta-x-partials/checkbox-setting.hbs"
-        label="Default Thread Type for Game Forums"
-        id="chkGamesImprovementsGameForumsDefaultThread"
-        config-path="gamesImprovements.forums.gameForumsDefaultThread"
-      }}
-
-      {{includes
-        "@ta-x-partials/select-setting.hbs"
-        render-condition='{ "selector": "#chkGamesImprovementsGameForumsDefaultThread", "checked": true }'
-        id="selGamesImprovementsGameForumsDefaultThreadValue"
-        config-path="gamesImprovements.forums.gameForumsDefaultThreadValue"
-        options='[
+  {{includes
+    "@ta-x-partials/select-setting.hbs"
+    render-condition='{ "selector": "#chkGamesImprovementsGameForumsDefaultThread", "checked": true }'
+    id="selGamesImprovementsGameForumsDefaultThreadValue"
+    config-path="gamesImprovements.forums.gameForumsDefaultThreadValue"
+    container-classes="ta-x-hide-padding-top"
+    options='[
       { "value": "all", "text": "All Threads", "selected": true },
       { "value": "community", "text": "Community Threads" },
       { "value": "gameinfo", "text": "Game Info Threads" }]'
-      }}
-    </div>
-  </div>
-</div>
+  }}
+{{/includes}}

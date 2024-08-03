@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "composite":true,
+    "types": ["jsdom", "node", "sanitize-html", "tampermonkey"]
+  },
+  "include": ["**/*.ts", "package.json", "tsconfig.json"],
+  "exclude": ["src/**/*.spec.ts", "test/**/*.ts"]
+}

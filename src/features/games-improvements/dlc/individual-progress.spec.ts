@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs-extra';
+import fs from 'fs';
 import { getPath } from '@ta-x-build-helpers';
 import { setHtml, createInnerTextSpies } from '@ta-x-test';
 import { gameDLC as config, GamesRegex } from '@ta-x-globals';
@@ -57,7 +57,7 @@ describe('games-improvements/dlc/individual-progress', () => {
     vi.spyOn(config, 'gameDLCIndividualProgress', 'get').mockReturnValueOnce(true);
     vi.spyOn(GamesRegex.Test, 'individualDlcUrl').mockReturnValueOnce(false);
     const memoizeFetchSpy = vi.spyOn(taxHelpers, 'memoizeFetch');
-    memoizeFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView || view)).toString());
+    memoizeFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView || view), 'utf8'));
 
     await individualProgress();
 
@@ -98,7 +98,7 @@ describe('games-improvements/dlc/individual-progress', () => {
       vi.spyOn(config, 'gameDLCIndividualProgress', 'get').mockReturnValueOnce(true);
       vi.spyOn(GamesRegex.Test, 'individualDlcUrl').mockReturnValueOnce(false);
       const memoizeFetchSpy = vi.spyOn(taxHelpers, 'memoizeFetch');
-      memoizeFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView || view)).toString());
+      memoizeFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView || view), 'utf8'));
 
       await individualProgress();
 
@@ -145,7 +145,7 @@ describe('games-improvements/dlc/individual-progress', () => {
     vi.spyOn(config, 'gameDLCIndividualProgress', 'get').mockReturnValueOnce(true);
     vi.spyOn(GamesRegex.Test, 'individualDlcUrl').mockReturnValueOnce(false);
     const memoizeFetchSpy = vi.spyOn(taxHelpers, 'memoizeFetch');
-    memoizeFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView || view)).toString());
+    memoizeFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView || view), 'utf8'));
 
     await individualProgress();
 
@@ -190,7 +190,7 @@ describe('games-improvements/dlc/individual-progress', () => {
     vi.spyOn(config, 'gameDLCIndividualProgress', 'get').mockReturnValueOnce(true);
     vi.spyOn(GamesRegex.Test, 'individualDlcUrl').mockReturnValueOnce(false);
     const memoizeFetchSpy = vi.spyOn(taxHelpers, 'memoizeFetch');
-    memoizeFetchSpy.mockResolvedValueOnce(readFileSync(getPath(memoizedView || view)).toString());
+    memoizeFetchSpy.mockResolvedValueOnce(fs.readFileSync(getPath(memoizedView || view), 'utf8'));
 
     await individualProgress();
 

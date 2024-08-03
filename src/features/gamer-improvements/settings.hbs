@@ -1,24 +1,8 @@
-<div class="ta-x-settings-menu-settings-accordion">
-  {{includes
-    "@ta-x-partials/accordion-header.hbs"
-    title="Gamer Improvements"
-    expanded=false
-    config-path="gamerImprovements.enabled"
-    asCheckbox=true
-    id="chkGamerImprovements"
-  }}
-
-  <div
-    class="ta-x-settings-menu-settings-accordion-body t-settings"
-    data-parent-accordion-body
-  >
-    {{includes
-      "@ta-x-partials/checkbox-setting.hbs"
-      label="Add Group By Game Button"
-      id="chkGamerImprovementsGroupByGameButton"
-      config-path="gamerImprovements.achievements.addGroupByGameButton"
-      helper-render-condition='{ "selector": "#chkGamerImprovementsGroupByGameButton", "checked": true }'
-      helper-text="This feature is unstyled, let me know if you have any ideas for how to make this look!"
-    }}
-  </div>
-</div>
+{{includes
+  "@ta-x-partials/checkbox-setting.hbs"
+  label="Add Group By Game Button"
+  id="chkGamerImprovementsGroupByGameButton"
+  config-path="gamerImprovements.achievements.addGroupByGameButton"
+  helper-render-condition='{ "selector": "#chkGamerImprovementsGroupByGameButton", "checked": true }'
+  helper-text="This feature is unstyled, let me know if you have any ideas for how to make this look!"
+}}

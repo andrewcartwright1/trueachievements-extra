@@ -1,0 +1,40 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "unicorn", "typescript"],
+  "rules": {
+    "typescript/no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true
+      }
+    ],
+    "eslint/no-console": "warn",
+    "import/no-unresolved": "error",
+    "import/named": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ]
+      }
+    ],
+    "eslint/curly": "error"
+  },
+  "overrides": [
+    {
+      "plugins": ["import", "unicorn", "typescript", "vitest"],
+      "files": ["./src/**/*.spec.ts"],
+      "rules": {
+        "vitest/no-conditional-expect": "off"
+      }
+    }
+  ]
+}
